@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Word Counter - Free Online Character & Word Count Tool</title>
+  <meta name="description" content="Free online word counter. Count words, characters, sentences, paragraphs in real-time. No signup required." />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f0f0f; color: #fff; min-height: 100vh; }
+    .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+    header { text-align: center; padding: 40px 20px 20px; }
+    header h1 { font-size: 2rem; margin-bottom: 10px; }
+    header p { color: #999; }
+    .back { color: #6c5ce7; text-decoration: none; display: inline-block; margin-bottom: 20px; font-size: 0.9rem; }
+
+    textarea {
+      width: 100%; height: 300px; padding: 20px;
+      background: #1a1a1a; border: 1px solid #444; border-radius: 12px;
+      color: #fff; font-size: 1rem; line-height: 1.6; resize: vertical;
+      transition: border-color .2s;
+    }
+    textarea:focus { outline: none; border-color: #6c5ce7; }
+
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;
+      margin: 20px 0;
+    }
+    .stat-box {
+      background: #1a1a1a; border-radius: 12px; padding: 20px; text-align: center;
+      border: 1px solid #2a2a2a;
+    }
+    .stat-box .num { font-size: 1.8rem; font-weight: bold; color: #6c5ce7; }
+    .stat-box .label { color: #888; font-size: 0.85rem; margin-top: 5px; }
+
+    .clear-btn {
+      background: #e74c3c; color: #fff; border: none;
+      padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+    .clear-btn:hover { background: #c0392b; }
+
+    .ad-banner { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 20px; text-align: center; margin: 20px 0; color: #555; font-size: 0.85rem; }
+    footer { text-align: center; padding: 30px; color: #555; font-size: 0.85rem; }
+    footer a { color: #555; }
+
+    @media (max-width: 600px) { .stats { grid-template-columns: repeat(2, 1fr); } header h1 { font-size: 1.5rem; } }
+  </style>
+</head>
+<body>
+<div class="container">
+  <a href="../" class="back">← All Tools</a>
+  <header>
+    <h1>📊 Word Counter</h1>
+    <p>Real-time word, character, sentence, and paragraph counter</p>
+  </header>
+
+  <div class="ad-banner">[ Ad Space — Google AdSense will go here ]</div>
+
+  <button class="clear-btn" id="clearBtn">🗑 Clear</button>
+  <textarea id="textArea" placeholder="Start typing or paste your text here..."></textarea>
+
+  <div class="stats">
+    <div class="stat-box"><div class="num" id="wordCount">0</div><div class="label">Words</div></div>
+    <div class="stat-box"><div class="num" id="charCount">0</div><div class="label">Characters</div></div>
+    <div class="stat-box"><div class="num" id="sentenceCount">0</div><div class="label">Sentences</div></div>
+    <div class="stat-box"><div class="num" id="paraCount">0</div><div class="label">Paragraphs</div></div>
+  </div>
+
+  <footer><p><a href="../privacy.html">Privacy Policy</a> — Free Online Tools</p></footer>
+</div>
+
+<script>
+const textArea = document.getElementById('textArea');
+const wordCount = document.getElementById('wordCount');
+const charCount = document.getElementById('charCount');
+const sentenceCount = document.getElementById('sentenceCount');
+const paraCount = document.getElementById('paraCount');
+const clearBtn = document.getElementById('clearBtn');
+
+function count() {
+  const text = textArea.value;
+  charCount.textContent = text.length;
+  wordCount.textContent = text.trim() ? text.trim().split(/\s+/).length : 0;
+  sentenceCount.textContent = text ? (text.match(/[.!?]+/g) || []).length : 0;
+  paraCount.textContent = text ? text.split(/\n\s*\n/).filter(p => p.trim()).length : 0;
+}
+
+textArea.addEventListener('input', count);
+clearBtn.addEventListener('click', () => { textArea.value = ''; count(); });
+</script>
+</body>
+</html>

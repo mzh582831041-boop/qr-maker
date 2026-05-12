@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QR Maker Free - Online QR Code Generator</title>
-  <meta name="description" content="Free online QR code generator. Create custom QR codes with colors and logos. No signup required." />
-  <link rel="canonical" href="https://mzh582831041-boop.github.io/qr-maker/" />
+  <title>Free Online Tools - QR Maker, Word Counter, JSON Formatter & More</title>
+  <meta name="description" content="Collection of free online tools. QR code generator, word counter, JSON formatter, image converter, and more. No signup required." />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -14,234 +13,98 @@
       color: #fff;
       min-height: 100vh;
     }
-    .container { max-width: 700px; margin: 0 auto; padding: 20px; }
-    header { text-align: center; padding: 40px 20px 20px; }
-    header h1 { font-size: 2.2rem; margin-bottom: 10px; }
+    .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+    header { text-align: center; padding: 50px 20px 30px; }
+    header h1 { font-size: 2.5rem; margin-bottom: 10px; }
     header p { color: #999; font-size: 1.1rem; }
 
-    .card {
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .tool-card {
       background: #1a1a1a;
       border-radius: 16px;
       padding: 30px;
-      margin: 20px 0;
-    }
-
-    .input-group { margin-bottom: 20px; }
-    label { display: block; margin-bottom: 8px; color: #aaa; font-size: 0.9rem; }
-    input, select {
-      width: 100%;
-      padding: 12px 16px;
-      background: #2a2a2a;
-      border: 1px solid #444;
-      border-radius: 8px;
+      text-decoration: none;
       color: #fff;
-      font-size: 1rem;
-      transition: border-color .2s;
+      transition: all .3s;
+      border: 1px solid #2a2a2a;
     }
-    input:focus, select:focus { outline: none; border-color: #6c5ce7; }
-    input::placeholder { color: #666; }
-
-    .color-row { display: flex; gap: 15px; margin-bottom: 20px; }
-    .color-row > div { flex: 1; }
-    .color-row input[type="color"] {
-      height: 44px;
-      padding: 4px;
-      cursor: pointer;
+    .tool-card:hover {
+      border-color: #6c5ce7;
+      transform: translateY(-4px);
+      background: #1e1a2e;
     }
-
-    .btn {
-      width: 100%;
-      padding: 14px;
-      background: #6c5ce7;
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: background .2s;
-      font-weight: 600;
-    }
-    .btn:hover { background: #5a4bd1; }
-    .btn:disabled { background: #444; cursor: not-allowed; }
-
-    .qr-output {
-      text-align: center;
-      margin-top: 20px;
-      display: none;
-    }
-    .qr-output.active { display: block; }
-    .qr-output img { max-width: 280px; border-radius: 8px; }
-
-    .btn-download {
-      background: #00b894;
-      margin-top: 15px;
-    }
-    .btn-download:hover { background: #00a381; }
+    .tool-card .icon { font-size: 2.5rem; margin-bottom: 15px; }
+    .tool-card h2 { font-size: 1.2rem; margin-bottom: 8px; }
+    .tool-card p { color: #888; font-size: 0.9rem; line-height: 1.5; }
 
     .ad-banner {
-      background: #1a1a1a;
-      border: 1px solid #333;
-      border-radius: 8px;
-      padding: 20px;
-      text-align: center;
-      margin: 20px 0;
-      color: #555;
-      font-size: 0.85rem;
+      background: #1a1a1a; border: 1px solid #333; border-radius: 8px;
+      padding: 20px; text-align: center; margin: 20px 0;
+      color: #555; font-size: 0.85rem;
     }
 
-    .how-it-works {
-      margin: 20px 0;
-      padding: 30px;
-      background: #1a1a1a;
-      border-radius: 12px;
-    }
-    .how-it-works h2 { margin-bottom: 20px; text-align: center; }
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .step { text-align: center; }
-    .step .num {
-      width: 40px; height: 40px;
-      background: #6c5ce7;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-    .step p { color: #999; font-size: 0.9rem; }
     footer { text-align: center; padding: 30px; color: #555; font-size: 0.85rem; }
+    footer a { color: #555; }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.8rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-
 <div class="container">
   <header>
-    <h1>🔳 QR Maker Free</h1>
-    <p>Create beautiful QR codes in seconds. Free & no signup.</p>
+    <h1>🛠️ Free Online Tools</h1>
+    <p>Simple, fast, free tools for everyday tasks. No signup, no uploads to server.</p>
   </header>
 
   <div class="ad-banner">[ Ad Space — Google AdSense will go here ]</div>
 
-  <div class="card">
-    <div class="input-group">
-      <label>URL or Text</label>
-      <input type="url" id="textInput" placeholder="https://example.com or any text..." />
-    </div>
+  <div class="grid">
+    <a href="https://mzh582831041-boop.github.io/qr-maker/" class="tool-card">
+      <div class="icon">🔳</div>
+      <h2>QR Code Generator</h2>
+      <p>Create custom QR codes with any color. Free download. Perfect for links, text, and more.</p>
+    </a>
 
-    <div class="color-row">
-      <div class="input-group">
-        <label>QR Color</label>
-        <input type="color" id="fgColor" value="#000000" />
-      </div>
-      <div class="input-group">
-        <label>Background</label>
-        <input type="color" id="bgColor" value="#ffffff" />
-      </div>
-    </div>
+    <a href="word-counter/" class="tool-card">
+      <div class="icon">📊</div>
+      <h2>Word Counter</h2>
+      <p>Count words, characters, sentences, and paragraphs. Real-time analysis for writers and students.</p>
+    </a>
 
-    <div class="input-group">
-      <label>Size</label>
-      <select id="sizeSelect">
-        <option value="200">Small (200x200)</option>
-        <option value="300" selected>Medium (300x300)</option>
-        <option value="400">Large (400x400)</option>
-        <option value="500">XL (500x500)</option>
-      </select>
-    </div>
+    <a href="json-formatter/" class="tool-card">
+      <div class="icon">📋</div>
+      <h2>JSON Formatter</h2>
+      <p>Format, validate, and beautify JSON. Fix malformed JSON instantly with one click.</p>
+    </a>
 
-    <button class="btn" id="generateBtn">✨ Generate QR Code</button>
+    <a href="image-converter/" class="tool-card">
+      <div class="icon">🖼️</div>
+      <h2>Image Converter</h2>
+      <p>Convert images between PNG, JPG, and WEBP formats. Resize and compress online free.</p>
+    </a>
 
-    <div class="qr-output" id="qrOutput">
-      <div id="qrContainer"></div>
-      <button class="btn btn-download" id="downloadBtn">⬇ Download PNG</button>
-    </div>
+    <a href="case-converter/" class="tool-card">
+      <div class="icon">🔤</div>
+      <h2>Text Case Converter</h2>
+      <p>Convert text to UPPERCASE, lowercase, Title Case, and more. Quick copy to clipboard.</p>
+    </a>
   </div>
 
-  <div class="how-it-works">
-    <h2>How it works</h2>
-    <div class="steps">
-      <div class="step"><div class="num">1</div><h3>Enter URL</h3><p>Paste any link or text</p></div>
-      <div class="step"><div class="num">2</div><h3>Customize</h3><p>Pick colors and size</p></div>
-      <div class="step"><div class="num">3</div><h3>Download</h3><p>Get your QR code free</p></div>
-    </div>
-  </div>
+  <div class="ad-banner">[ Ad Space — Google AdSense will go here ]</div>
 
   <footer>
-    <p>QR Maker Free — Free online QR code generator</p>
-    <p style="margin-top:10px;font-size:0.8rem;"><a href="privacy.html" style="color:#555;">Privacy Policy</a></p>
+    <p>Free Online Tools — Simple tools for everyday tasks</p>
+    <p style="margin-top:8px;"><a href="privacy.html">Privacy Policy</a></p>
   </footer>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-<script>
-const textInput = document.getElementById('textInput');
-const fgColor = document.getElementById('fgColor');
-const bgColor = document.getElementById('bgColor');
-const sizeSelect = document.getElementById('sizeSelect');
-const generateBtn = document.getElementById('generateBtn');
-const qrOutput = document.getElementById('qrOutput');
-const qrContainer = document.getElementById('qrContainer');
-const downloadBtn = document.getElementById('downloadBtn');
-
-let currentQR = null;
-
-generateBtn.addEventListener('click', generateQR);
-textInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') generateQR(); });
-
-function generateQR() {
-  const text = textInput.value.trim();
-  if (!text) {
-    textInput.focus();
-    return;
-  }
-
-  const size = parseInt(sizeSelect.value);
-  const fg = fgColor.value;
-  const bg = bgColor.value;
-
-  // Clear previous
-  qrContainer.innerHTML = '';
-
-  currentQR = new QRCode(qrContainer, {
-    text: text,
-    width: size,
-    height: size,
-    colorDark: fg,
-    colorLight: bg,
-    correctLevel: QRCode.CorrectLevel.H
-  });
-
-  qrOutput.classList.add('active');
-}
-
-downloadBtn.addEventListener('click', () => {
-  const img = qrContainer.querySelector('img');
-  if (!img) return;
-
-  const canvas = document.createElement('canvas');
-  canvas.width = img.naturalWidth;
-  canvas.height = img.naturalHeight;
-  const ctx = canvas.getContext('2d');
-
-  // Draw background
-  ctx.fillStyle = bgColor.value;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  // Draw QR image
-  ctx.drawImage(img, 0, 0);
-
-  // Download
-  const a = document.createElement('a');
-  a.href = canvas.toDataURL('image/png');
-  a.download = 'qrcode.png';
-  a.click();
-});
-
-// Generate example on load
-setTimeout(() => {
-  textInput.value = 'https://example.com';
-  generateQR();
-}, 500);
-</script>
 </body>
 </html>

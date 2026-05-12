@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Converter - Free Online Image Format Converter</title>
+  <meta name="description" content="Free online image converter. Convert PNG, JPG, WEBP images. Resize images online. No signup required." />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f0f0f; color: #fff; min-height: 100vh; }
+    .container { max-width: 700px; margin: 0 auto; padding: 20px; }
+    header { text-align: center; padding: 40px 20px 20px; }
+    header h1 { font-size: 2rem; margin-bottom: 10px; }
+    header p { color: #999; }
+    .back { color: #6c5ce7; text-decoration: none; display: inline-block; margin-bottom: 20px; font-size: 0.9rem; }
+
+    .upload-box {
+      border: 2px dashed #444; border-radius: 16px; padding: 50px 20px;
+      text-align: center; cursor: pointer; transition: all .3s; background: #1a1a1a;
+    }
+    .upload-box:hover { border-color: #6c5ce7; background: #1e1a2e; }
+    .upload-box .icon { font-size: 3rem; margin-bottom: 10px; }
+    .upload-box p { color: #888; }
+
+    .controls { margin: 20px 0; display: none; }
+    .controls.active { display: block; }
+
+    .preview-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; }
+    .preview-box { background: #1a1a1a; border-radius: 12px; padding: 15px; text-align: center; }
+    .preview-box h3 { font-size: 0.9rem; color: #aaa; margin-bottom: 10px; }
+    .preview-box img { max-width: 100%; max-height: 250px; border-radius: 8px; }
+
+    .options { display: flex; gap: 15px; flex-wrap: wrap; margin: 15px 0; align-items: end; }
+    .option-group { flex: 1; min-width: 130px; }
+    .option-group label { display: block; color: #aaa; font-size: 0.85rem; margin-bottom: 5px; }
+    .option-group select, .option-group input {
+      width: 100%; padding: 10px; background: #2a2a2a; border: 1px solid #444;
+      border-radius: 8px; color: #fff; font-size: 0.9rem;
+    }
+    .option-group select:focus, .option-group input:focus { outline: none; border-color: #6c5ce7; }
+
+    .btn {
+      width: 100%; padding: 12px; border: none; border-radius: 8px;
+      cursor: pointer; font-size: 1rem; font-weight: 600; margin: 5px 0;
+    }
+    .btn-primary { background: #6c5ce7; color: #fff; }
+    .btn-primary:hover { background: #5a4bd1; }
+    .btn-success { background: #00b894; color: #fff; }
+    .btn-success:hover { background: #00a381; }
+
+    .ad-banner { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 20px; text-align: center; margin: 20px 0; color: #555; font-size: 0.85rem; }
+    footer { text-align: center; padding: 30px; color: #555; font-size: 0.85rem; }
+    footer a { color: #555; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <a href="../" class="back">← All Tools</a>
+  <header>
+    <h1>🖼️ Image Converter</h1>
+    <p>Convert and resize images — all in your browser</p>
+  </header>
+
+  <div class="ad-banner">[ Ad Space — Google AdSense will go here ]</div>
+
+  <div class="upload-box" id="uploadBox">
+    <div class="icon">📁</div>
+    <p><strong>Click to upload an image</strong></p>
+    <p style="font-size:0.85rem;color:#666;margin-top:5px;">Supports PNG, JPG, WEBP</p>
+  </div>
+  <input type="file" id="fileInput" accept="image/*" style="display:none" />
+
+  <div class="controls" id="controls">
+    <div class="preview-row">
+      <div class="preview-box">
+        <h3>📥 Original</h3>
+        <img id="originalPreview" src="" alt="Original" />
+      </div>
+      <div class="preview-box">
+        <h3>✨ Preview</h3>
+        <img id="resultPreview" src="" alt="Preview" />
+      </div>
+    </div>
+
+    <div class="options">
+      <div class="option-group">
+        <label>Format</label>
+        <select id="formatSelect">
+          <option value="png">PNG</option>
+          <option value="jpeg">JPG</option>
+          <option value="webp">WEBP</option>
+        </select>
+      </div>
+      <div class="option-group">
+        <label>Width (px)</label>
+        <input type="number" id="widthInput" placeholder="Auto" min="1" />
+      </div>
+      <div class="option-group">
+        <label>Quality (JPEG/WEBP)</label>
+        <select id="qualitySelect">
+          <option value="1">100%</option>
+          <option value="0.8" selected>80%</option>
+          <option value="0.6">60%</option>
+          <option value="0.4">40%</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn btn-success" id="downloadBtn">⬇ Download</button>
+  </div>
+
+  <footer><p><a href="../privacy.html">Privacy Policy</a> — Free Online Tools</p></footer>
+</div>
+
+<script>
+const uploadBox = document.getElementById('uploadBox');
+const fileInput = document.getElementById('fileInput');
+const controls = document.getElementById('controls');
+const originalPreview = document.getElementById('originalPreview');
+const resultPreview = document.getElementById('resultPreview');
+const formatSelect = document.getElementById('formatSelect');
+const widthInput = document.getElementById('widthInput');
+const qualitySelect = document.getElementById('qualitySelect');
+const downloadBtn = document.getElementById('downloadBtn');
+
+let originalFile = null;
+
+uploadBox.addEventListener('click', () => fileInput.click());
+fileInput.addEventListener('change', () => { if (fileInput.files.length) handleFile(fileInput.files[0]); });
+
+function handleFile(file) {
+  originalFile = file;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    originalPreview.src = e.target.result;
+    controls.classList.add('active');
+    updatePreview();
+  };
+  reader.readAsDataURL(file);
+}
+
+function updatePreview() {
+  if (!originalPreview.src) return;
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const img = new Image();
+  img.onload = () => {
+    const format = formatSelect.value;
+    const width = widthInput.value ? parseInt(widthInput.value) : img.width;
+    const height = Math.round(img.height * (width / img.width));
+    canvas.width = width;
+    canvas.height = height;
+    ctx.drawImage(img, 0, 0, width, height);
+    const quality = parseFloat(qualitySelect.value);
+    resultPreview.src = canvas.toDataURL(`image/${format === 'jpeg' ? 'jpeg' : format}`, quality);
+  };
+  img.src = originalPreview.src;
+}
+
+formatSelect.addEventListener('change', updatePreview);
+widthInput.addEventListener('input', updatePreview);
+qualitySelect.addEventListener('change', updatePreview);
+
+downloadBtn.addEventListener('click', () => {
+  const a = document.createElement('a');
+  const format = formatSelect.value;
+  const ext = format === 'jpeg' ? 'jpg' : format;
+  a.href = resultPreview.src;
+  a.download = `converted.${ext}`;
+  a.click();
+});
+</script>
+</body>
+</html>
