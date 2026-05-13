@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Random Generator - Free Number, Dice, Coin Flip & More</title>
+  <meta name="description" content="Free online random generator. Generate random numbers, roll dice, flip coins, pick random items. Fun and private, all in your browser." />
+  <script src="/consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5276967064769484" crossorigin="anonymous"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f0f0f; color: #fff; min-height: 100vh; }
+    .container { max-width: 700px; margin: 0 auto; padding: 20px; }
+    header { text-align: center; padding: 40px 20px 20px; }
+    header h1 { font-size: 2rem; margin-bottom: 10px; }
+    header p { color: #999; }
+    .back { color: #6c5ce7; text-decoration: none; display: inline-block; margin-bottom: 20px; font-size: 0.9rem; }
+    .card { background: #1a1a1a; border-radius: 16px; padding: 30px; margin: 20px 0; }
+    .mini-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .mini-card { background: #2a2a2a; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; border: 1px solid #333; transition: all .2s; }
+    .mini-card:hover { border-color: #6c5ce7; background: #1e1a2e; }
+    .mini-card.active-mode { border-color: #6c5ce7; background: #1e1a2e; }
+    .mini-card.active-mode .label { color: #6c5ce7; }
+    .mini-card .emoji { font-size: 2rem; margin-bottom: 8px; }
+    .mini-card .label { color: #aaa; font-size: 0.85rem; }
+    .result-area { text-align: center; padding: 40px 20px; background: #2a2a2a; border-radius: 12px; margin-bottom: 20px; }
+    .result-area .result { font-size: 3.5rem; font-weight: 700; color: #6c5ce7; }
+    .result-area .sub { color: #888; font-size: 0.9rem; margin-top: 8px; }
+    .input-row { display: flex; gap: 12px; margin-bottom: 15px; }
+    .input-row > div { flex: 1; }
+    .input-row label { display: block; margin-bottom: 6px; color: #aaa; font-size: 0.85rem; }
+    .input-row input { width: 100%; padding: 10px 14px; background: #2a2a2a; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 1rem; }
+    .input-row input:focus { outline: none; border-color: #6c5ce7; }
+    .btn { padding: 12px 30px; border: none; border-radius: 8px; color: #fff; font-size: 1rem; cursor: pointer; font-weight: 600; transition: background .2s; }
+    .btn-primary { background: #6c5ce7; }
+    .btn-primary:hover { background: #5a4bd1; }
+    .btn-generate { width: 100%; background: #6c5ce7; padding: 14px; border: none; border-radius: 8px; color: #fff; font-size: 1.1rem; cursor: pointer; font-weight: 600; transition: background .2s; }
+    .btn-generate:hover { background: #5a4bd1; }
+    .history { margin-top: 20px; }
+    .history .h-item { display: inline-block; background: #2a2a2a; padding: 6px 14px; border-radius: 20px; margin: 4px; font-size: 0.85rem; color: #aaa; }
+    footer { text-align: center; padding: 30px; color: #555; font-size: 0.85rem; }
+    footer a { color: #555; }
+    @media (max-width: 600px) { .mini-grid { grid-template-columns: 1fr 1fr; } .input-row { flex-direction: column; } header h1 { font-size: 1.5rem; } }
+  </style>
+</head>
+<body>
+<div class="container">
+  <a href="../" class="back">← All Tools</a>
+  <header>
+    <h1>🎲 Random Generator</h1>
+    <p>Random numbers, dice rolls, coin flips, and more</p>
+  </header>
+  <div class="card">
+    <div class="mini-grid" id="modeGrid">
+      <div class="mini-card active-mode" data-mode="number"><div class="emoji">🔢</div><div class="label">Random Number</div></div>
+      <div class="mini-card" data-mode="dice"><div class="emoji">🎲</div><div class="label">Roll Dice</div></div>
+      <div class="mini-card" data-mode="coin"><div class="emoji">🪙</div><div class="label">Flip Coin</div></div>
+    </div>
+    <div id="numberOptions">
+      <div class="input-row">
+        <div><label>Min</label><input type="number" id="randMin" value="1" /></div>
+        <div><label>Max</label><input type="number" id="randMax" value="100" /></div>
+      </div>
+    </div>
+    <div class="result-area" id="resultArea">
+      <div class="result" id="resultDisplay">42</div>
+      <div class="sub" id="resultSub">Random number between 1 and 100</div>
+    </div>
+    <button class="btn-generate" id="generateBtn">🎲 Generate</button>
+    <div class="history" id="history">
+      <div style="color:#555;font-size:0.85rem;margin-bottom:8px;">Recent:</div>
+      <div id="historyList"></div>
+    </div>
+  </div>
+  <footer><p><a href="../privacy.html">Privacy Policy</a> — Free Online Tools</p></footer>
+</div>
+<script>
+(function() {
+  const modeGrid = document.getElementById('modeGrid');
+  const numberOptions = document.getElementById('numberOptions');
+  const resultDisplay = document.getElementById('resultDisplay');
+  const resultSub = document.getElementById('resultSub');
+  const generateBtn = document.getElementById('generateBtn');
+  const randMin = document.getElementById('randMin');
+  const randMax = document.getElementById('randMax');
+  const historyList = document.getElementById('historyList');
+
+  let currentMode = 'number';
+  const history = [];
+  const maxHistory = 20;
+
+  function switchMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.mini-card').forEach(c => c.classList.remove('active-mode'));
+    document.querySelector(`[data-mode="${mode}"]`).classList.add('active-mode');
+    if (mode === 'number') {
+      numberOptions.style.display = 'block';
+    } else {
+      numberOptions.style.display = 'none';
+    }
+    generate();
+  }
+
+  modeGrid.addEventListener('click', (e) => {
+    const card = e.target.closest('.mini-card');
+    if (card) switchMode(card.dataset.mode);
+  });
+
+  function addHistory(val) {
+    history.unshift(val);
+    if (history.length > maxHistory) history.pop();
+    historyList.innerHTML = history.map(v => `<span class="h-item">${v}</span>`).join('');
+  }
+
+  function generate() {
+    let result, sub;
+    if (currentMode === 'number') {
+      const min = parseInt(randMin.value) || 1;
+      const max = parseInt(randMax.value) || 100;
+      if (min > max) { randMin.value = 1; randMax.value = 100; return generate(); }
+      result = Math.floor(Math.random() * (max - min + 1)) + min;
+      sub = `Random number between ${min} and ${max}`;
+    } else if (currentMode === 'dice') {
+      result = '🎲 ' + (Math.floor(Math.random() * 6) + 1);
+      sub = 'Dice roll (1-6)';
+    } else if (currentMode === 'coin') {
+      result = Math.random() < 0.5 ? '👑 Heads' : '🦅 Tails';
+      sub = 'Coin flip';
+    }
+    resultDisplay.textContent = result;
+    resultSub.textContent = sub;
+    addHistory(result);
+  }
+
+  generateBtn.addEventListener('click', generate);
+  randMin.addEventListener('keydown', (e) => { if (e.key === 'Enter') generate(); });
+  randMax.addEventListener('keydown', (e) => { if (e.key === 'Enter') generate(); });
+
+  // Initial generate
+  generate();
+})();
+</script>
+</body>
+</html>

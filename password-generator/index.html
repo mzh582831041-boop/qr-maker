@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Generator - Free Secure Password Creator</title>
+  <meta name="description" content="Generate strong, secure passwords instantly. Customizable length, uppercase, lowercase, numbers, symbols. Free and private, all in your browser." />
+  <script src="/consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5276967064769484" crossorigin="anonymous"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f0f0f; color: #fff; min-height: 100vh; }
+    .container { max-width: 700px; margin: 0 auto; padding: 20px; }
+    header { text-align: center; padding: 40px 20px 20px; }
+    header h1 { font-size: 2rem; margin-bottom: 10px; }
+    header p { color: #999; }
+    .back { color: #6c5ce7; text-decoration: none; display: inline-block; margin-bottom: 20px; font-size: 0.9rem; }
+    .card { background: #1a1a1a; border-radius: 16px; padding: 30px; margin: 20px 0; }
+    .input-group { margin-bottom: 20px; }
+    label { display: block; margin-bottom: 8px; color: #aaa; font-size: 0.9rem; }
+    .password-display { background: #2a2a2a; border: 1px solid #444; border-radius: 8px; padding: 16px; font-family: 'Courier New', monospace; font-size: 1.3rem; word-break: break-all; color: #fff; margin-bottom: 15px; min-height: 54px; display: flex; align-items: center; }
+    .options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .option-item { display: flex; align-items: center; gap: 10px; }
+    .option-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: #6c5ce7; cursor: pointer; }
+    .option-item label { margin: 0; cursor: pointer; }
+    .length-row { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+    .length-row input[type="range"] { flex: 1; accent-color: #6c5ce7; }
+    .length-row span { color: #6c5ce7; font-weight: 600; font-size: 1.2rem; min-width: 30px; text-align: center; }
+    .btn { width: 100%; padding: 14px; border: none; border-radius: 8px; color: #fff; font-size: 1.1rem; cursor: pointer; font-weight: 600; transition: background .2s; }
+    .btn-primary { background: #6c5ce7; }
+    .btn-primary:hover { background: #5a4bd1; }
+    .btn-success { background: #00b894; margin-top: 15px; }
+    .btn-success:hover { background: #00a381; }
+    .strength { margin-top: 15px; padding: 12px; border-radius: 8px; text-align: center; font-weight: 600; }
+    .strength.weak { background: #d63031; color: #fff; }
+    .strength.medium { background: #fdcb6e; color: #222; }
+    .strength.strong { background: #00b894; color: #fff; }
+    footer { text-align: center; padding: 30px; color: #555; font-size: 0.85rem; }
+    footer a { color: #555; }
+    @media (max-width: 600px) { .options { grid-template-columns: 1fr; } header h1 { font-size: 1.5rem; } }
+  </style>
+</head>
+<body>
+<div class="container">
+  <a href="../" class="back">← All Tools</a>
+  <header>
+    <h1>🔑 Password Generator</h1>
+    <p>Generate strong, secure passwords instantly</p>
+  </header>
+  <div class="card">
+    <div class="password-display" id="passwordDisplay">Click Generate to create a password</div>
+    <div class="length-row">
+      <label>Length: <span id="lengthVal">16</span></label>
+      <input type="range" id="lengthSlider" min="4" max="64" value="16" />
+    </div>
+    <div class="options">
+      <div class="option-item"><input type="checkbox" id="chkUpper" checked /><label for="chkUpper">A-Z (Uppercase)</label></div>
+      <div class="option-item"><input type="checkbox" id="chkLower" checked /><label for="chkLower">a-z (Lowercase)</label></div>
+      <div class="option-item"><input type="checkbox" id="chkNumber" checked /><label for="chkNumber">0-9 (Numbers)</label></div>
+      <div class="option-item"><input type="checkbox" id="chkSymbol" /><label for="chkSymbol">!@# (Symbols)</label></div>
+    </div>
+    <div id="strengthBar" class="strength strong">Strong</div>
+    <button class="btn btn-primary" id="generateBtn">🔄 Generate Password</button>
+    <button class="btn btn-success" id="copyBtn">📋 Copy to Clipboard</button>
+  </div>
+  <footer><p><a href="../privacy.html">Privacy Policy</a> — Free Online Tools</p></footer>
+</div>
+<script>
+(function() {
+  const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const lower = 'abcdefghijklmnopqrstuvwxyz';
+  const numbers = '0123456789';
+  const symbols = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+  const display = document.getElementById('passwordDisplay');
+  const slider = document.getElementById('lengthSlider');
+  const lengthVal = document.getElementById('lengthVal');
+  const chkUpper = document.getElementById('chkUpper');
+  const chkLower = document.getElementById('chkLower');
+  const chkNumber = document.getElementById('chkNumber');
+  const chkSymbol = document.getElementById('chkSymbol');
+  const strengthBar = document.getElementById('strengthBar');
+  const generateBtn = document.getElementById('generateBtn');
+  const copyBtn = document.getElementById('copyBtn');
+
+  slider.addEventListener('input', () => { lengthVal.textContent = slider.value; });
+  generateBtn.addEventListener('click', generate);
+  copyBtn.addEventListener('click', copyPassword);
+
+  function getCharset() {
+    let chars = '';
+    if (chkUpper.checked) chars += upper;
+    if (chkLower.checked) chars += lower;
+    if (chkNumber.checked) chars += numbers;
+    if (chkSymbol.checked) chars += symbols;
+    if (!chars) { chkLower.checked = true; chars = lower; }
+    return chars;
+  }
+
+  function generate() {
+    const chars = getCharset();
+    const len = parseInt(slider.value);
+    let password = '';
+    // Ensure at least one from each selected set
+    if (chkUpper.checked) password += upper[Math.floor(Math.random() * upper.length)];
+    if (chkLower.checked) password += lower[Math.floor(Math.random() * lower.length)];
+    if (chkNumber.checked) password += numbers[Math.floor(Math.random() * numbers.length)];
+    if (chkSymbol.checked) password += symbols[Math.floor(Math.random() * symbols.length)];
+    for (let i = password.length; i < len; i++) {
+      password += chars[Math.floor(Math.random() * chars.length)];
+    }
+    // Shuffle
+    password = password.split('').sort(() => Math.random() - 0.5).join('');
+    display.textContent = password;
+    updateStrength(len, password);
+  }
+
+  function updateStrength(len, pwd) {
+    let score = 0;
+    if (len >= 8) score++;
+    if (len >= 12) score++;
+    if (len >= 16) score++;
+    if (/[a-z]/.test(pwd) && /[A-Z]/.test(pwd)) score++;
+    if (/\d/.test(pwd) && /[^a-zA-Z0-9]/.test(pwd)) score++;
+    if (score >= 4) { strengthBar.className = 'strength strong'; strengthBar.textContent = '💪 Strong'; }
+    else if (score >= 2) { strengthBar.className = 'strength medium'; strengthBar.textContent = '⚠️ Medium'; }
+    else { strengthBar.className = 'strength weak'; strengthBar.textContent = '❌ Weak'; }
+  }
+
+  function copyPassword() {
+    const pwd = display.textContent;
+    if (!pwd || pwd === 'Click Generate to create a password') return;
+    navigator.clipboard.writeText(pwd).then(() => {
+      copyBtn.textContent = '✅ Copied!';
+      setTimeout(() => { copyBtn.textContent = '📋 Copy to Clipboard'; }, 2000);
+    }).catch(() => {
+      // Fallback
+      const ta = document.createElement('textarea');
+      ta.value = pwd; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+      copyBtn.textContent = '✅ Copied!';
+      setTimeout(() => { copyBtn.textContent = '📋 Copy to Clipboard'; }, 2000);
+    });
+  }
+
+  generate();
+})();
+</script>
+</body>
+</html>

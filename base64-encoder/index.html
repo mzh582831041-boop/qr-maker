@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Base64 Encoder & Decoder - Free Online Tool</title>
+  <meta name="description" content="Free online Base64 encode/decode tool. Encode text to Base64 and decode Base64 back to text. Supports UTF-8. Fast and private, all in your browser." />
+  <script src="/consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5276967064769484" crossorigin="anonymous"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f0f0f; color: #fff; min-height: 100vh; }
+    .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+    header { text-align: center; padding: 40px 20px 20px; }
+    header h1 { font-size: 2rem; margin-bottom: 10px; }
+    header p { color: #999; }
+    .back { color: #6c5ce7; text-decoration: none; display: inline-block; margin-bottom: 20px; font-size: 0.9rem; }
+    .card { background: #1a1a1a; border-radius: 16px; padding: 30px; margin: 20px 0; }
+    .tab-bar { display: flex; gap: 0; margin-bottom: 20px; border-radius: 8px; overflow: hidden; }
+    .tab { flex: 1; padding: 12px; text-align: center; background: #2a2a2a; border: none; color: #888; font-size: 1rem; cursor: pointer; font-weight: 600; transition: all .2s; }
+    .tab.active { background: #6c5ce7; color: #fff; }
+    .tab:not(.active):hover { background: #333; color: #aaa; }
+    textarea { width: 100%; min-height: 160px; padding: 16px; background: #2a2a2a; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 0.95rem; font-family: 'Courier New', monospace; resize: vertical; }
+    textarea:focus { outline: none; border-color: #6c5ce7; }
+    .btn-row { display: flex; gap: 10px; margin: 15px 0; }
+    .btn { flex: 1; padding: 12px; border: none; border-radius: 8px; color: #fff; font-size: 1rem; cursor: pointer; font-weight: 600; transition: background .2s; }
+    .btn-encode { background: #6c5ce7; }
+    .btn-encode:hover { background: #5a4bd1; }
+    .btn-decode { background: #00b894; }
+    .btn-decode:hover { background: #00a381; }
+    .btn-copy { background: #333; }
+    .btn-copy:hover { background: #444; }
+    .btn-clear { background: #d63031; }
+    .btn-clear:hover { background: #b71c1c; }
+    .char-count { color: #555; font-size: 0.8rem; text-align: right; margin-top: 8px; }
+    footer { text-align: center; padding: 30px; color: #555; font-size: 0.85rem; }
+    footer a { color: #555; }
+    @media (max-width: 600px) { .btn-row { flex-direction: column; } header h1 { font-size: 1.5rem; } }
+  </style>
+</head>
+<body>
+<div class="container">
+  <a href="../" class="back">← All Tools</a>
+  <header>
+    <h1>🔐 Base64 Encoder / Decoder</h1>
+    <p>Encode text to Base64 or decode Base64 back to text</p>
+  </header>
+  <div class="card">
+    <div class="tab-bar">
+      <button class="tab active" id="tabEncode">Encode</button>
+      <button class="tab" id="tabDecode">Decode</button>
+    </div>
+    <div class="input-group">
+      <textarea id="inputText" placeholder="Type or paste text here..."></textarea>
+      <div class="char-count" id="charCount">0 characters</div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-encode" id="encodeBtn">⬇ Encode to Base64</button>
+      <button class="btn btn-decode" id="decodeBtn">⬆ Decode from Base64</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-copy" id="copyBtn">📋 Copy Result</button>
+      <button class="btn btn-clear" id="clearBtn">🗑️ Clear</button>
+    </div>
+    <div class="input-group" style="margin-top:20px;">
+      <label style="color:#aaa;font-size:0.9rem;display:block;margin-bottom:8px;">Result</label>
+      <textarea id="outputText" placeholder="Result will appear here..." readonly></textarea>
+    </div>
+  </div>
+  <footer><p><a href="../privacy.html">Privacy Policy</a> — Free Online Tools</p></footer>
+</div>
+<script>
+(function() {
+  const inputText = document.getElementById('inputText');
+  const outputText = document.getElementById('outputText');
+  const encodeBtn = document.getElementById('encodeBtn');
+  const decodeBtn = document.getElementById('decodeBtn');
+  const copyBtn = document.getElementById('copyBtn');
+  const clearBtn = document.getElementById('clearBtn');
+  const charCount = document.getElementById('charCount');
+  const tabEncode = document.getElementById('tabEncode');
+  const tabDecode = document.getElementById('tabDecode');
+
+  inputText.addEventListener('input', () => {
+    charCount.textContent = inputText.value.length + ' characters';
+  });
+
+  function b64Encode(str) {
+    try {
+      return btoa(unescape(encodeURIComponent(str)));
+    } catch(e) { return 'Error: Invalid text'; }
+  }
+
+  function b64Decode(str) {
+    try {
+      return decodeURIComponent(escape(atob(str.replace(/\s/g, ''))));
+    } catch(e) { return 'Error: Invalid Base64 input'; }
+  }
+
+  encodeBtn.addEventListener('click', () => {
+    outputText.value = b64Encode(inputText.value);
+  });
+
+  decodeBtn.addEventListener('click', () => {
+    outputText.value = b64Decode(inputText.value);
+  });
+
+  copyBtn.addEventListener('click', () => {
+    if (!outputText.value) return;
+    navigator.clipboard.writeText(outputText.value).then(() => {
+      copyBtn.textContent = '✅ Copied!';
+      setTimeout(() => { copyBtn.textContent = '📋 Copy Result'; }, 2000);
+    }).catch(() => {
+      outputText.select(); document.execCommand('copy');
+      copyBtn.textContent = '✅ Copied!';
+      setTimeout(() => { copyBtn.textContent = '📋 Copy Result'; }, 2000);
+    });
+  });
+
+  clearBtn.addEventListener('click', () => {
+    inputText.value = '';
+    outputText.value = '';
+    charCount.textContent = '0 characters';
+  });
+
+  // Tab switching
+  tabEncode.addEventListener('click', () => {
+    tabEncode.classList.add('active'); tabDecode.classList.remove('active');
+    inputText.placeholder = 'Type or paste text to encode...';
+  });
+  tabDecode.addEventListener('click', () => {
+    tabDecode.classList.add('active'); tabEncode.classList.remove('active');
+    inputText.placeholder = 'Paste Base64 string to decode...';
+  });
+
+  // Enter to encode/decode
+  inputText.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && e.ctrlKey) {
+      if (tabEncode.classList.contains('active')) encodeBtn.click();
+      else decodeBtn.click();
+    }
+  });
+
+  // Swap: click output to put into input
+  outputText.addEventListener('dblclick', () => {
+    inputText.value = outputText.value;
+    charCount.textContent = inputText.value.length + ' characters';
+  });
+})();
+</script>
+</body>
+</html>
