@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Color Picker - Free Online Color Palette Tool</title>
   <meta name="description" content="Free online color picker. Pick colors, get HEX, RGB, HSL values. Explore color palettes. Perfect for web designers and developers." />
+  <meta name="google-adsense-account" content="ca-pub-5276967064769484">
   <link rel="canonical" href="https://www.xiaoma001.us.ci/color-picker/" />
   <script src="/consent.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5276967064769484" crossorigin="anonymous"></script>
@@ -32,7 +33,30 @@
     footer { text-align: center; padding: 30px; color: #555; font-size: 0.85rem; }
     footer a { color: #555; }
     @media (max-width: 600px) { .values { grid-template-columns: 1fr; } header h1 { font-size: 1.5rem; } }
-  </style>
+  
+    .tool-info {
+      max-width: 700px; margin: 30px auto; padding: 0 20px;
+    }
+    .tool-info h2 {
+      color: #fff; font-size: 1.2rem; margin: 25px 0 12px;
+    }
+    .tool-info p {
+      color: #999; line-height: 1.7; margin-bottom: 12px;
+    }
+    .tool-info strong { color: #ccc; }
+</style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Color Picker",
+    "description": "Free online color picker. Pick colors, get HEX, RGB, and HSL values. Palette generator for designers and developers.",
+    "url": "https://www.xiaoma001.us.ci/color-picker/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "JavaScript"
+  }
+  </script>
 </head>
 <body>
 <div class="container">
@@ -54,7 +78,7 @@
     <div style="margin-top:20px;"><h3 style="color:#aaa;font-size:0.9rem;margin-bottom:10px;">🎯 Saved Colors</h3>
     <div class="palette" id="palette"></div></div>
   </div>
-  <footer><p><a href="../privacy.html">Privacy Policy</a> — Free Online Tools</p></footer>
+  <section class="tool-info">  <h2>How to Use the Color Picker</h2>  <p>Click the color wheel or use the color input to select any color. The tool instantly displays its HEX, RGB, and HSL values. Click any value to copy it to your clipboard. Use the palette section to save and compare colors side by side.</p>  <p><strong>Great for:</strong> Web designers choosing color schemes, developers matching brand colors, UI designers creating consistent palettes, and anyone who needs exact color values.</p></section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
 </div>
 <div class="toast" id="toast">Copied!</div>
 <script>

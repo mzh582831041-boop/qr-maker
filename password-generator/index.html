@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Password Generator - Free Secure Password Creator</title>
   <meta name="description" content="Generate strong, secure passwords instantly. Customizable length, uppercase, lowercase, numbers, symbols. Free and private, all in your browser." />
+  <meta name="google-adsense-account" content="ca-pub-5276967064769484">
   <link rel="canonical" href="https://www.xiaoma001.us.ci/password-generator/" />
   <script src="/consent.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5276967064769484" crossorigin="anonymous"></script>
@@ -39,7 +40,30 @@
     footer { text-align: center; padding: 30px; color: #555; font-size: 0.85rem; }
     footer a { color: #555; }
     @media (max-width: 600px) { .options { grid-template-columns: 1fr; } header h1 { font-size: 1.5rem; } }
-  </style>
+  
+    .tool-info {
+      max-width: 700px; margin: 30px auto; padding: 0 20px;
+    }
+    .tool-info h2 {
+      color: #fff; font-size: 1.2rem; margin: 25px 0 12px;
+    }
+    .tool-info p {
+      color: #999; line-height: 1.7; margin-bottom: 12px;
+    }
+    .tool-info strong { color: #ccc; }
+</style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Password Generator",
+    "description": "Free online password generator. Create strong, secure passwords with customizable length and character types. Strength indicator included.",
+    "url": "https://www.xiaoma001.us.ci/password-generator/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "JavaScript"
+  }
+  </script>
 </head>
 <body>
 <div class="container">
@@ -64,7 +88,7 @@
     <button class="btn btn-primary" id="generateBtn">🔄 Generate Password</button>
     <button class="btn btn-success" id="copyBtn">📋 Copy to Clipboard</button>
   </div>
-  <footer><p><a href="../privacy.html">Privacy Policy</a> — Free Online Tools</p></footer>
+  <section class="tool-info">  <h2>How to Use the Password Generator</h2>  <p>Adjust the password length using the slider (4-64 characters). Select which character types to include: uppercase letters, lowercase letters, numbers, and symbols. The strength indicator gives instant feedback on password security. Click "Copy to Clipboard" to use your new password.</p>  <p><strong>Best practices:</strong> Use at least 12 characters with a mix of all character types for strong security. Longer passwords (16+) are recommended for important accounts like email and banking.</p>  <p>All generation is done locally in your browser. No passwords are ever transmitted or stored.</p></section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
 </div>
 <script>
 (function() {

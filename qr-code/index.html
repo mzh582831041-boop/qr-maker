@@ -54,7 +54,30 @@
 
     footer { text-align: center; padding: 30px; color: #555; font-size: 0.85rem; }
     footer a { color: #555; }
-  </style>
+  
+    .tool-info {
+      max-width: 700px; margin: 30px auto; padding: 0 20px;
+    }
+    .tool-info h2 {
+      color: #fff; font-size: 1.2rem; margin: 25px 0 12px;
+    }
+    .tool-info p {
+      color: #999; line-height: 1.7; margin-bottom: 12px;
+    }
+    .tool-info strong { color: #ccc; }
+</style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "QR Code Generator",
+    "description": "Free online QR code generator. Create custom QR codes with any foreground and background colors. Download as PNG. No signup required.",
+    "url": "https://www.xiaoma001.us.ci/qr-code/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "JavaScript"
+  }
+  </script>
 </head>
 <body>
 <div class="container">
@@ -95,7 +118,15 @@
     </div>
   </div>
 
-  <footer><p><a href="../privacy.html">Privacy Policy</a> — Free Online Tools</p></footer>
+  <section class="tool-info">
+  <h2>How to Use the QR Code Generator</h2>
+  <p>Enter any URL or text in the input field, choose your preferred colors and size, then click "Generate QR Code" to create your custom QR code. You can download the result as a high-quality PNG image.</p>
+  <p><strong>Use cases:</strong> Share website links at events, add QR codes to business cards, create scannable WiFi credentials, or encode contact information for easy sharing.</p>
+  <p>All processing happens in your browser. No data is uploaded to any server.</p>
+</section>
+  <footer>
+    <p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p>
+  </footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script>
