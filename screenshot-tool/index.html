@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Screenshot Tool - Free Online Page Capture</title>
+  <meta name="description" content="Free online website screenshot tool. Capture full webpage screenshots instantly. Enter any URL and get a high-quality PNG screenshot. No signup required." />
+  <meta name="google-adsense-account" content="ca-pub-5276967064769484">
+  <link rel="canonical" href="https://www.xiaoma001.us.ci/screenshot-tool/" />
+  <script src="/consent.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5276967064769484" crossorigin="anonymous"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f0f0f; color: #fff; min-height: 100vh;
+    }
+    .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+    header { text-align: center; padding: 40px 20px 20px; }
+    header h1 { font-size: 2rem; margin-bottom: 10px; }
+    header p { color: #999; }
+    .back { color: #6c5ce7; text-decoration: none; display: inline-block; margin-bottom: 20px; font-size: 0.9rem; }
+
+    .card {
+      background: #1a1a1a; border-radius: 16px; padding: 30px; margin: 20px 0;
+    }
+    .input-group { margin-bottom: 20px; }
+    label { display: block; margin-bottom: 8px; color: #aaa; font-size: 0.9rem; }
+    input[type="url"] {
+      width: 100%; padding: 14px 16px; background: #2a2a2a; border: 1px solid #444;
+      border-radius: 8px; color: #fff; font-size: 1rem;
+    }
+    input[type="url"]:focus { outline: none; border-color: #6c5ce7; }
+
+    .options-row {
+      display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;
+    }
+    .options-row select {
+      padding: 10px 14px; background: #2a2a2a; border: 1px solid #444;
+      border-radius: 8px; color: #fff; font-size: 0.95rem; cursor: pointer; flex: 1; min-width: 140px;
+    }
+    .options-row select:focus { outline: none; border-color: #6c5ce7; }
+
+    .btn {
+      width: 100%; padding: 14px; border: none; border-radius: 8px;
+      color: #fff; font-size: 1.1rem; cursor: pointer; font-weight: 600;
+      transition: background .2s;
+    }
+    .btn-primary { background: #6c5ce7; }
+    .btn-primary:hover { background: #5a4bd1; }
+    .btn-primary:disabled { background: #444; cursor: not-allowed; }
+    .btn-success { background: #00b894; margin-top: 15px; }
+    .btn-success:hover { background: #00a381; }
+    .btn-success:disabled { background: #444; cursor: not-allowed; }
+
+    .screenshot-output {
+      margin-top: 20px; display: none; text-align: center;
+    }
+    .screenshot-output.active { display: block; }
+    .screenshot-output img {
+      max-width: 100%; border-radius: 8px; border: 1px solid #333;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .screenshot-output .url-label {
+      color: #888; font-size: 0.85rem; margin-bottom: 15px; word-break: break-all;
+    }
+
+    .loading {
+      text-align: center; padding: 40px; display: none;
+    }
+    .loading.active { display: block; }
+    .spinner {
+      width: 40px; height: 40px; border: 3px solid #333; border-top-color: #6c5ce7;
+      border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 15px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading p { color: #999; }
+
+    .error-msg {
+      background: #2d1a1a; border: 1px solid #d63031; border-radius: 8px;
+      padding: 16px; margin-top: 15px; color: #ff6b6b; text-align: center; display: none;
+    }
+    .error-msg.active { display: block; }
+
+    footer { text-align: center; padding: 30px; color: #555; font-size: 0.85rem; }
+    footer a { color: #555; }
+
+    .tool-info {
+      max-width: 700px; margin: 30px auto; padding: 0 20px;
+    }
+    .tool-info h2 {
+      color: #fff; font-size: 1.2rem; margin: 25px 0 12px;
+    }
+    .tool-info p {
+      color: #999; line-height: 1.7; margin-bottom: 12px;
+    }
+    .tool-info strong { color: #ccc; }
+    .tool-info ul { color: #999; padding-left: 20px; line-height: 1.8; }
+    .tool-info li { margin-bottom: 6px; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Website Screenshot Tool",
+    "description": "Free online website screenshot generator. Capture any webpage as a PNG image. Enter URL and get instant results.",
+    "url": "https://www.xiaoma001.us.ci/screenshot-tool/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "JavaScript"
+  }
+  </script>
+</head>
+<body>
+<div class="container">
+  <a href="../" class="back">← All Tools</a>
+  <header>
+    <h1>📸 Website Screenshot Tool</h1>
+    <p>Capture any webpage as a PNG screenshot instantly</p>
+  </header>
+
+  <div class="card">
+    <div class="input-group">
+      <label for="urlInput">Enter Website URL</label>
+      <input type="url" id="urlInput" placeholder="https://example.com" value="https://" />
+    </div>
+
+    <div class="options-row">
+      <select id="deviceSelect">
+        <option value="desktop">💻 Desktop (1280×720)</option>
+        <option value="mobile">📱 Mobile (375×667)</option>
+        <option value="tablet">📟 Tablet (768×1024)</option>
+      </select>
+      <select id="delaySelect">
+        <option value="1000">1s delay</option>
+        <option value="2000" selected>2s delay</option>
+        <option value="3000">3s delay</option>
+        <option value="5000">5s delay</option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary" id="captureBtn">📸 Capture Screenshot</button>
+
+    <div class="loading" id="loadingIndicator">
+      <div class="spinner"></div>
+      <p>Taking screenshot... please wait</p>
+      <p style="font-size:0.8rem;color:#666;margin-top:8px;">This may take a few seconds</p>
+    </div>
+
+    <div class="error-msg" id="errorMsg">
+      <p>⚠️ Failed to capture screenshot. Please check the URL and try again.</p>
+      <p style="font-size:0.85rem;margin-top:8px;color:#ff9999;" id="errorDetail"></p>
+    </div>
+
+    <div class="screenshot-output" id="screenshotOutput">
+      <p class="url-label" id="capturedUrlLabel"></p>
+      <img id="screenshotImg" alt="Website screenshot" />
+      <button class="btn btn-success" id="downloadBtn">⬇️ Download PNG</button>
+    </div>
+  </div>
+
+  <section class="tool-info">
+    <h2>About This Tool</h2>
+    <p>This <strong>website screenshot tool</strong> lets you capture any webpage as a high-quality PNG image. Simply enter a URL, choose your device type (desktop, mobile, or tablet), and click capture. The screenshot is generated instantly and you can download it directly.</p>
+
+    <h2>How to Use</h2>
+    <ol style="color:#999;line-height:2;padding-left:20px;">
+      <li>Enter the full URL of the website you want to capture (include <strong>https://</strong>)</li>
+      <li>Select your preferred device viewport (desktop, mobile, or tablet)</li>
+      <li>Choose a delay time for pages that load slowly</li>
+      <li>Click <strong>Capture Screenshot</strong> and wait a moment</li>
+      <li>Preview the result and click <strong>Download PNG</strong> to save it</li>
+    </ol>
+
+    <h2>Use Cases</h2>
+    <ul>
+      <li><strong>Web designers</strong> – Capture design references and portfolios</li>
+      <li><strong>Marketers</strong> – Take screenshots for presentations and reports</li>
+      <li><strong>Developers</strong> – Test responsive layouts across different viewports</li>
+      <li><strong>Content creators</strong> – Capture website visuals for articles and reviews</li>
+      <li><strong>Competitive research</strong> – Save snapshots of competitor websites</li>
+    </ul>
+
+    <h2>Features</h2>
+    <ul>
+      <li>✅ Multiple viewport sizes (desktop, mobile, tablet)</li>
+      <li>✅ Adjustable capture delay for dynamic content</li>
+      <li>✅ High-quality PNG output</li>
+      <li>✅ One-click download</li>
+      <li>✅ No signup or registration required</li>
+      <li>✅ Completely free to use</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Free Online Tools — Simple tools for everyday tasks</p>
+    <p style="margin-top:8px;">
+      <a href="../privacy.html">Privacy Policy</a> ·
+      <a href="../about.html">About</a> ·
+      <a href="../contact.html">Contact</a>
+    </p>
+  </footer>
+</div>
+
+<script>
+(function() {
+  const urlInput = document.getElementById('urlInput');
+  const deviceSelect = document.getElementById('deviceSelect');
+  const delaySelect = document.getElementById('delaySelect');
+  const captureBtn = document.getElementById('captureBtn');
+  const loading = document.getElementById('loadingIndicator');
+  const errorMsg = document.getElementById('errorMsg');
+  const errorDetail = document.getElementById('errorDetail');
+  const output = document.getElementById('screenshotOutput');
+  const screenshotImg = document.getElementById('screenshotImg');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const capturedUrlLabel = document.getElementById('capturedUrlLabel');
+
+  // Screenshot API endpoints (tried in order, fallback if one fails)
+  const API_PROVIDERS = [
+    {
+      name: 'Miniature',
+      buildUrl: (url, device, delay) => {
+        const widths = { desktop: '1280', mobile: '375', tablet: '768' };
+        return `https://api.miniature.io/?url=${encodeURIComponent(url)}&width=${widths[device] || '1280'}&delay=${delay}&format=png`;
+      }
+    },
+    {
+      name: 'Thum.io',
+      buildUrl: (url, device, delay) => {
+        const widths = { desktop: '1280', mobile: '375', tablet: '768' };
+        const w = widths[device] || '1280';
+        return `https://image.thum.io/get/width/${w}/delay/${delay}/png/${encodeURIComponent(url)}`;
+      }
+    }
+  ];
+
+  let currentProviderIndex = 0;
+  let screenshotBlobUrl = null;
+
+  function normalizeUrl(input) {
+    let url = input.trim();
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      url = 'https://' + url;
+    }
+    return url;
+  }
+
+  function showLoading() {
+    loading.classList.add('active');
+    errorMsg.classList.remove('active');
+    output.classList.remove('active');
+    captureBtn.disabled = true;
+    captureBtn.textContent = '⏳ Capturing...';
+  }
+
+  function hideLoading() {
+    loading.classList.remove('active');
+    captureBtn.disabled = false;
+    captureBtn.textContent = '📸 Capture Screenshot';
+  }
+
+  function showError(msg, detail) {
+    hideLoading();
+    errorMsg.classList.add('active');
+    errorDetail.textContent = detail || '';
+    output.classList.remove('active');
+  }
+
+  function tryCapture() {
+    const url = normalizeUrl(urlInput.value);
+    if (!url || url === 'https://') {
+      showError('Please enter a valid URL.', '');
+      return;
+    }
+
+    if (currentProviderIndex >= API_PROVIDERS.length) {
+      showError(
+        'All screenshot services are currently unavailable.',
+        'Please try again later or check if the URL is accessible.'
+      );
+      currentProviderIndex = 0;
+      return;
+    }
+
+    const provider = API_PROVIDERS[currentProviderIndex];
+    const device = deviceSelect.value;
+    const delay = delaySelect.value;
+    const imageUrl = provider.buildUrl(url, device, delay);
+
+    showLoading();
+    capturedUrlLabel.textContent = `📄 ${url}`;
+
+    // Use fetch with a timeout to check if the image loads
+    const img = new Image();
+    const timeout = setTimeout(() => {
+      img.src = '';
+      currentProviderIndex++;
+      tryCapture();
+    }, 15000);
+
+    img.onload = function() {
+      clearTimeout(timeout);
+      hideLoading();
+      currentProviderIndex = 0; // reset for next capture
+      screenshotImg.src = imageUrl;
+      output.classList.add('active');
+
+      // Clean up old blob URL
+      if (screenshotBlobUrl) {
+        URL.revokeObjectURL(screenshotBlobUrl);
+        screenshotBlobUrl = null;
+      }
+
+      // For download, we need to fetch the image and create a blob
+      fetch(imageUrl)
+        .then(res => res.blob())
+        .then(blob => {
+          screenshotBlobUrl = URL.createObjectURL(blob);
+          downloadBtn.disabled = false;
+          downloadBtn.textContent = '⬇️ Download PNG';
+        })
+        .catch(() => {
+          // If fetch fails, try direct download via canvas
+          downloadBtn.disabled = false;
+          downloadBtn.textContent = '⬇️ Download PNG (direct)';
+        });
+    };
+
+    img.onerror = function() {
+      clearTimeout(timeout);
+      currentProviderIndex++;
+      tryCapture();
+    };
+
+    img.src = imageUrl;
+  }
+
+  captureBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    currentProviderIndex = 0;
+    tryCapture();
+  });
+
+  urlInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      currentProviderIndex = 0;
+      tryCapture();
+    }
+  });
+
+  downloadBtn.addEventListener('click', function() {
+    const url = normalizeUrl(urlInput.value);
+    const imgSrc = screenshotImg.src;
+    if (!imgSrc) return;
+
+    // Use canvas to download
+    const canvas = document.createElement('canvas');
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = function() {
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      const link = document.createElement('a');
+      const domain = url.replace(/^https?:\/\//, '').split('/')[0].replace(/[^a-zA-Z0-9]/g, '_');
+      link.download = `screenshot_${domain}_${Date.now()}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    };
+    img.onerror = function() {
+      // Fallback: direct link
+      const link = document.createElement('a');
+      const domain = url.replace(/^https?:\/\//, '').split('/')[0].replace(/[^a-zA-Z0-9]/g, '_');
+      link.download = `screenshot_${domain}_${Date.now()}.png`;
+      link.href = imgSrc;
+      link.target = '_blank';
+      link.click();
+    };
+    img.src = imgSrc;
+  });
+
+  // Pre-populate with example URL
+  urlInput.value = 'https://www.xiaoma001.us.ci';
+  urlInput.setSelectionRange(urlInput.value.length, urlInput.value.length);
+})();
+</script>
+</body>
+</html>
