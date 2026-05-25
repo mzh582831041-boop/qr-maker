@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Website Screenshot Tool - Free Online Page Capture</title>
-  <meta name="description" content="Free online website screenshot tool. Capture full webpage screenshots instantly. Enter any URL and get a high-quality PNG screenshot. No signup required." />
+  <meta name="description" content="Free online website screenshot tool. Capture any webpage as a PNG image using your browser's screen capture. No server upload, works offline. No signup required." />
   <meta name="google-adsense-account" content="ca-pub-5276967064769484">
   <link rel="canonical" href="https://www.xiaoma001.us.ci/screenshot-tool/" />
   <script src="/consent.js"></script>
@@ -51,7 +51,8 @@
     .btn-primary:disabled { background: #444; cursor: not-allowed; }
     .btn-success { background: #00b894; margin-top: 15px; }
     .btn-success:hover { background: #00a381; }
-    .btn-success:disabled { background: #444; cursor: not-allowed; }
+    .btn-secondary { background: #444; margin-top: 10px; }
+    .btn-secondary:hover { background: #555; }
 
     .screenshot-output {
       margin-top: 20px; display: none; text-align: center;
@@ -82,6 +83,14 @@
     }
     .error-msg.active { display: block; }
 
+    .howto {
+      background: #1a1a1a; border-radius: 12px; padding: 20px; margin: 15px 0;
+      border: 1px solid #2a2a2a;
+    }
+    .howto h3 { color: #6c5ce7; margin-bottom: 12px; font-size: 1rem; }
+    .howto ol { color: #999; padding-left: 20px; line-height: 2; font-size: 0.9rem; }
+    .howto li { margin-bottom: 4px; }
+
     footer { text-align: center; padding: 30px; color: #555; font-size: 0.85rem; }
     footer a { color: #555; }
 
@@ -103,100 +112,84 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Website Screenshot Tool",
-    "description": "Free online website screenshot generator. Capture any webpage as a PNG image. Enter URL and get instant results.",
+    "description": "Free online website screenshot tool. Capture any webpage as a PNG image using your browser's built-in screen capture API.",
     "url": "https://www.xiaoma001.us.ci/screenshot-tool/",
-    "applicationCategory": "UtilityApplication",
+    "applicationCategory": "Multimedia",
     "operatingSystem": "Any",
-    "browserRequirements": "JavaScript"
+    "browserRequirements": "JavaScript, Screen Capture API (Chrome/Edge/Firefox)"
   }
   </script>
 </head>
 <body>
 <div class="container">
-  <a href="../" class="back">← All Tools</a>
+  <a href="../" class="back">&larr; All Tools</a>
   <header>
-    <h1>📸 Website Screenshot Tool</h1>
-    <p>Capture any webpage as a PNG screenshot instantly</p>
+    <h1>&#x1F4F8; Website Screenshot Tool</h1>
+    <p>Capture any webpage using your browser's screen capture feature</p>
   </header>
+
+  <div class="howto">
+    <h3>&#x1F4CB; How it works</h3>
+    <ol>
+      <li>Open the website you want to capture in a <strong>new tab or window</strong></li>
+      <li>Come back here and click <strong>Capture Screenshot</strong></li>
+      <li>When the browser prompt appears, select the tab/window with your target website</li>
+      <li>The screenshot is captured instantly &mdash; download as PNG</li>
+    </ol>
+  </div>
 
   <div class="card">
     <div class="input-group">
-      <label for="urlInput">Enter Website URL</label>
+      <label for="urlInput">Target Website URL (just for reference)</label>
       <input type="url" id="urlInput" placeholder="https://example.com" value="https://" />
     </div>
 
-    <div class="options-row">
-      <select id="deviceSelect">
-        <option value="desktop">💻 Desktop (1280×720)</option>
-        <option value="mobile">📱 Mobile (375×667)</option>
-        <option value="tablet">📟 Tablet (768×1024)</option>
-      </select>
-      <select id="delaySelect">
-        <option value="1000">1s delay</option>
-        <option value="2000" selected>2s delay</option>
-        <option value="3000">3s delay</option>
-        <option value="5000">5s delay</option>
-      </select>
-    </div>
-
-    <button class="btn btn-primary" id="captureBtn">📸 Capture Screenshot</button>
+    <button class="btn btn-primary" id="captureBtn">&#x1F4F7; Capture Screenshot</button>
 
     <div class="loading" id="loadingIndicator">
       <div class="spinner"></div>
-      <p>Taking screenshot... please wait</p>
-      <p style="font-size:0.8rem;color:#666;margin-top:8px;">This may take a few seconds</p>
+      <p>Taking screenshot...</p>
+      <p style="font-size:0.8rem;color:#666;margin-top:8px;" id="loadingStep">Please select a window/tab when prompted</p>
     </div>
 
     <div class="error-msg" id="errorMsg">
-      <p>⚠️ Failed to capture screenshot. Please check the URL and try again.</p>
+      <p>&#x26A0;&#xFE0F; <span id="errorTitle">Failed to capture screenshot</span></p>
       <p style="font-size:0.85rem;margin-top:8px;color:#ff9999;" id="errorDetail"></p>
     </div>
 
     <div class="screenshot-output" id="screenshotOutput">
       <p class="url-label" id="capturedUrlLabel"></p>
-      <img id="screenshotImg" alt="Website screenshot" />
-      <button class="btn btn-success" id="downloadBtn">⬇️ Download PNG</button>
+      <img id="screenshotImg" alt="Screenshot" />
+      <button class="btn btn-success" id="downloadBtn">&#x2B07; Download PNG</button>
+      <button class="btn btn-secondary" id="captureAnotherBtn">&#x1F504; Capture Another</button>
     </div>
   </div>
 
   <section class="tool-info">
     <h2>About This Tool</h2>
-    <p>This <strong>website screenshot tool</strong> lets you capture any webpage as a high-quality PNG image. Simply enter a URL, choose your device type (desktop, mobile, or tablet), and click capture. The screenshot is generated instantly and you can download it directly.</p>
+    <p>This <strong>website screenshot tool</strong> uses your browser's built-in screen capture API to take screenshots of any webpage. Unlike other online screenshot tools, it doesn't rely on external servers or third-party APIs &mdash; everything runs locally in your browser.</p>
 
-    <h2>How to Use</h2>
-    <ol style="color:#999;line-height:2;padding-left:20px;">
-      <li>Enter the full URL of the website you want to capture (include <strong>https://</strong>)</li>
-      <li>Select your preferred device viewport (desktop, mobile, or tablet)</li>
-      <li>Choose a delay time for pages that load slowly</li>
-      <li>Click <strong>Capture Screenshot</strong> and wait a moment</li>
-      <li>Preview the result and click <strong>Download PNG</strong> to save it</li>
-    </ol>
+    <h2>Browser Support</h2>
+    <p>This tool works best on <strong>Google Chrome</strong>, <strong>Microsoft Edge</strong>, and <strong>Firefox</strong> (desktop). Safari has limited support for screen capture. Make sure you're using a modern browser on a desktop or laptop computer.</p>
 
     <h2>Use Cases</h2>
     <ul>
-      <li><strong>Web designers</strong> – Capture design references and portfolios</li>
-      <li><strong>Marketers</strong> – Take screenshots for presentations and reports</li>
-      <li><strong>Developers</strong> – Test responsive layouts across different viewports</li>
-      <li><strong>Content creators</strong> – Capture website visuals for articles and reviews</li>
-      <li><strong>Competitive research</strong> – Save snapshots of competitor websites</li>
+      <li><strong>Web designers</strong> &ndash; Capture design references and portfolios</li>
+      <li><strong>Marketers</strong> &ndash; Take screenshots for presentations and reports</li>
+      <li><strong>Developers</strong> &ndash; Document website behavior and bugs</li>
+      <li><strong>Content creators</strong> &ndash; Capture website visuals for reviews</li>
+      <li><strong>Competitive research</strong> &ndash; Save snapshots of competitor websites</li>
     </ul>
 
-    <h2>Features</h2>
-    <ul>
-      <li>✅ Multiple viewport sizes (desktop, mobile, tablet)</li>
-      <li>✅ Adjustable capture delay for dynamic content</li>
-      <li>✅ High-quality PNG output</li>
-      <li>✅ One-click download</li>
-      <li>✅ No signup or registration required</li>
-      <li>✅ Completely free to use</li>
-    </ul>
+    <h2>Privacy</h2>
+    <p>Your screenshot never leaves your device. The Screen Capture API works locally and no image data is uploaded to any server. The URL you enter is only used as a filename reference and is not sent anywhere.</p>
   </section>
 
   <footer>
-    <p>Free Online Tools — Simple tools for everyday tasks</p>
+    <p>Free Online Tools &mdash; Simple tools for everyday tasks</p>
     <p style="margin-top:8px;">
-      <a href="../privacy.html">Privacy Policy</a> ·
-      <a href="../about.html">About</a> ·
+      <a href="../privacy.html">Privacy Policy</a> &middot;
+      <a href="../about.html">About</a> &middot;
       <a href="../contact.html">Contact</a>
     </p>
   </footer>
@@ -205,49 +198,24 @@
 <script>
 (function() {
   const urlInput = document.getElementById('urlInput');
-  const deviceSelect = document.getElementById('deviceSelect');
-  const delaySelect = document.getElementById('delaySelect');
   const captureBtn = document.getElementById('captureBtn');
   const loadingEl = document.getElementById('loadingIndicator');
+  const loadingStep = document.getElementById('loadingStep');
   const errorMsg = document.getElementById('errorMsg');
+  const errorTitle = document.getElementById('errorTitle');
   const errorDetail = document.getElementById('errorDetail');
   const output = document.getElementById('screenshotOutput');
   const screenshotImg = document.getElementById('screenshotImg');
   const downloadBtn = document.getElementById('downloadBtn');
+  const captureAnotherBtn = document.getElementById('captureAnotherBtn');
   const capturedUrlLabel = document.getElementById('capturedUrlLabel');
 
-  // Screenshot API providers - tries each until one works
-  const API_PROVIDERS = [
-    {
-      name: 'Thum.io',
-      buildUrl: (url, device, delay) => {
-        const widths = { desktop: '1280', mobile: '375', tablet: '768' };
-        const w = widths[device] || '1280';
-        return \`https://image.thum.io/get/width/\${w}/delay/\${delay}/png/\${encodeURIComponent(url)}\`;
-      }
-    },
-    {
-      name: 'Miniature.io',
-      buildUrl: (url, device, delay) => {
-        const widths = { desktop: '1280', mobile: '375', tablet: '768' };
-        const w = widths[device] || '1280';
-        return \`https://api.miniature.io/?url=\${encodeURIComponent(url)}\&width=\${w}\`;
-      }
-    }
-  ];
+  let mediaStream = null;
 
-  let currentCaptureId = 0;
-
-  function normalizeUrl(input) {
-    let url = input.trim();
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      url = 'https://' + url;
-    }
-    return url;
-  }
-
-  function showLoading() {
+  function showLoading(msg, step) {
     loadingEl.classList.add('active');
+    if (msg) loadingEl.querySelector('p').textContent = msg;
+    if (step) loadingStep.textContent = step;
     errorMsg.classList.remove('active');
     output.classList.remove('active');
     captureBtn.disabled = true;
@@ -257,98 +225,130 @@
   function hideLoading() {
     loadingEl.classList.remove('active');
     captureBtn.disabled = false;
-    captureBtn.textContent = '📸 Capture Screenshot';
+    captureBtn.textContent = '📷 Capture Screenshot';
   }
 
-  function showError(msg, detail) {
+  function showError(title, detail) {
     hideLoading();
     errorMsg.classList.add('active');
+    errorTitle.textContent = title || 'Failed to capture screenshot';
     errorDetail.textContent = detail || '';
     output.classList.remove('active');
   }
 
-  // Load an image and return a promise that resolves with the img or rejects
-  function loadImage(src, timeoutMs) {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      const timer = setTimeout(() => {
-        img.src = '';
-        reject(new Error('Timeout'));
-      }, timeoutMs);
-      img.onload = function() {
-        clearTimeout(timer);
-        resolve(img);
-      };
-      img.onerror = function() {
-        clearTimeout(timer);
-        reject(new Error('Failed to load'));
-      };
-      img.src = src;
-    });
+  function stopMediaStream() {
+    if (mediaStream) {
+      mediaStream.getTracks().forEach(t => t.stop());
+      mediaStream = null;
+    }
   }
 
   async function captureScreenshot() {
-    const url = normalizeUrl(urlInput.value);
-    if (!url || url === 'https://') {
-      showError('Please enter a valid URL.', '');
-      return;
-    }
+    const url = urlInput.value.trim() || 'captured_page';
 
-    const captureId = ++currentCaptureId;
-    const device = deviceSelect.value;
-    const delay = delaySelect.value;
+    // Clean up previous stream
+    stopMediaStream();
 
-    showLoading();
-    capturedUrlLabel.textContent = \`📄 \${url}\`;
+    try {
+      showLoading(
+        '🔍 Requesting screen access...',
+        'A browser popup will appear. Select the tab or window you want to capture.'
+      );
 
-    // Build all provider URLs
-    const attempts = API_PROVIDERS.map(p => ({
-      name: p.name,
-      src: p.buildUrl(url, device, delay)
-    }));
+      // Request screen capture — user selects which tab/window
+      mediaStream = await navigator.mediaDevices.getDisplayMedia({
+        video: {
+          cursor: 'never',
+          displaySurface: 'browser'
+        },
+        audio: false
+      });
 
-    // Try each provider in parallel
-    for (const attempt of attempts) {
-      if (captureId !== currentCaptureId) return; // cancelled
+      showLoading('📸 Capturing frame...', 'Hold on, rendering the screenshot...');
 
-      try {
-        const img = await loadImage(attempt.src, 12000);
-        if (captureId !== currentCaptureId) return;
+      // Get video track settings for dimensions
+      const videoTrack = mediaStream.getVideoTracks()[0];
+      const settings = videoTrack.getSettings ? videoTrack.getSettings() : {};
+      const width = settings.width || 1920;
+      const height = settings.height || 1080;
 
-        // Success!
-        hideLoading();
-        screenshotImg.src = attempt.src;
-        screenshotImg.alt = \`Screenshot of \${url}\`;
-        output.classList.add('active');
+      // Create a video element to grab a frame
+      const video = document.createElement('video');
+      video.srcObject = mediaStream;
+      video.muted = true;
+      await video.play();
 
-        // Simple download via right-click or direct image open
-        downloadBtn.onclick = function() {
-          const link = document.createElement('a');
-          const domain = url.replace(/^https?:\/\//, '').split('/')[0].replace(/[^a-zA-Z0-9]/g, '_');
-          link.download = \`screenshot_\${domain}_\${Date.now()}.png\`;
-          link.href = attempt.src;
-          link.target = '_blank';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        };
-        return;
-      } catch (e) {
-        // Try next provider
-        continue;
+      // Wait for a frame to be ready
+      await new Promise(r => setTimeout(r, 300));
+
+      // Draw to canvas
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, width, height);
+
+      // Stop video
+      video.pause();
+      video.srcObject = null;
+
+      // Stop the screen capture stream
+      stopMediaStream();
+
+      // Convert to PNG data URL
+      const dataUrl = canvas.toDataURL('image/png');
+
+      // Show result
+      screenshotImg.src = dataUrl;
+      screenshotImg.alt = `Screenshot`;
+
+      const domain = url.replace(/^https?:\/\//, '').split('/')[0].replace(/[^a-zA-Z0-9.-]/g, '_');
+      capturedUrlLabel.textContent = `📄 ${domain} — ${width}×${height}px`;
+
+      // Download handler
+      downloadBtn.onclick = function() {
+        const link = document.createElement('a');
+        link.download = `screenshot_${domain}_${Date.now()}.png`;
+        link.href = dataUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
+
+      hideLoading();
+      output.classList.add('active');
+
+    } catch (err) {
+      stopMediaStream();
+      hideLoading();
+
+      if (err.name === 'NotAllowedError' || err.name === 'AbortError' || err.name === 'NotReadableError') {
+        showError(
+          'Screen capture was cancelled or denied.',
+          'You need to click "Allow" or select a window/tab when the browser prompt appears. If you don\'t see the prompt, check your browser\'s permission settings.'
+        );
+      } else if (err.name === 'NotSupportedError' || err.name === 'TypeError') {
+        showError(
+          'Screen capture is not supported in this browser.',
+          'Please use Google Chrome, Microsoft Edge, or Firefox on a desktop computer.'
+        );
+      } else {
+        showError(
+          'Failed to capture screenshot.',
+          `Error: ${err.message || err.name || 'Unknown error'}\n\nTip: Open the target website in another tab first, then click Capture and select that tab.`
+        );
       }
     }
-
-    // All providers failed
-    showError(
-      'Failed to capture screenshot. This may be due to network restrictions.',
-      'Tips: Try a different URL, or use your browser\'s built-in screenshot (right-click → Take Screenshot).'
-    );
   }
 
   captureBtn.addEventListener('click', function(e) {
     e.preventDefault();
     captureScreenshot();
+  });
+
+  captureAnotherBtn.addEventListener('click', function() {
+    output.classList.remove('active');
+    captureBtn.textContent = '📷 Capture Screenshot';
   });
 
   urlInput.addEventListener('keydown', function(e) {
@@ -358,7 +358,7 @@
     }
   });
 
-  // Focus URL input and select all text
+  // Pre-fill example URL
   urlInput.value = 'https://www.xiaoma001.us.ci';
   urlInput.select();
 })();
