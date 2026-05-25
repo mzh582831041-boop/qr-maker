@@ -208,7 +208,7 @@
   const deviceSelect = document.getElementById('deviceSelect');
   const delaySelect = document.getElementById('delaySelect');
   const captureBtn = document.getElementById('captureBtn');
-  const loading = document.getElementById('loadingIndicator');
+  const loadingEl = document.getElementById('loadingIndicator');
   const errorMsg = document.getElementById('errorMsg');
   const errorDetail = document.getElementById('errorDetail');
   const output = document.getElementById('screenshotOutput');
@@ -216,27 +216,27 @@
   const downloadBtn = document.getElementById('downloadBtn');
   const capturedUrlLabel = document.getElementById('capturedUrlLabel');
 
-  // Screenshot API endpoints (tried in order, fallback if one fails)
+  // Screenshot API providers - tries each until one works
   const API_PROVIDERS = [
-    {
-      name: 'Miniature',
-      buildUrl: (url, device, delay) => {
-        const widths = { desktop: '1280', mobile: '375', tablet: '768' };
-        return `https://api.miniature.io/?url=${encodeURIComponent(url)}&width=${widths[device] || '1280'}&delay=${delay}&format=png`;
-      }
-    },
     {
       name: 'Thum.io',
       buildUrl: (url, device, delay) => {
         const widths = { desktop: '1280', mobile: '375', tablet: '768' };
         const w = widths[device] || '1280';
-        return `https://image.thum.io/get/width/${w}/delay/${delay}/png/${encodeURIComponent(url)}`;
+        return \`https://image.thum.io/get/width/\${w}/delay/\${delay}/png/\${encodeURIComponent(url)}\`;
+      }
+    },
+    {
+      name: 'Miniature.io',
+      buildUrl: (url, device, delay) => {
+        const widths = { desktop: '1280', mobile: '375', tablet: '768' };
+        const w = widths[device] || '1280';
+        return \`https://api.miniature.io/?url=\${encodeURIComponent(url)}\&width=\${w}\`;
       }
     }
   ];
 
-  let currentProviderIndex = 0;
-  let screenshotBlobUrl = null;
+  let currentCaptureId = 0;
 
   function normalizeUrl(input) {
     let url = input.trim();
@@ -247,7 +247,7 @@
   }
 
   function showLoading() {
-    loading.classList.add('active');
+    loadingEl.classList.add('active');
     errorMsg.classList.remove('active');
     output.classList.remove('active');
     captureBtn.disabled = true;
@@ -255,7 +255,7 @@
   }
 
   function hideLoading() {
-    loading.classList.remove('active');
+    loadingEl.classList.remove('active');
     captureBtn.disabled = false;
     captureBtn.textContent = '📸 Capture Screenshot';
   }
@@ -267,124 +267,100 @@
     output.classList.remove('active');
   }
 
-  function tryCapture() {
+  // Load an image and return a promise that resolves with the img or rejects
+  function loadImage(src, timeoutMs) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const timer = setTimeout(() => {
+        img.src = '';
+        reject(new Error('Timeout'));
+      }, timeoutMs);
+      img.onload = function() {
+        clearTimeout(timer);
+        resolve(img);
+      };
+      img.onerror = function() {
+        clearTimeout(timer);
+        reject(new Error('Failed to load'));
+      };
+      img.src = src;
+    });
+  }
+
+  async function captureScreenshot() {
     const url = normalizeUrl(urlInput.value);
     if (!url || url === 'https://') {
       showError('Please enter a valid URL.', '');
       return;
     }
 
-    if (currentProviderIndex >= API_PROVIDERS.length) {
-      showError(
-        'All screenshot services are currently unavailable.',
-        'Please try again later or check if the URL is accessible.'
-      );
-      currentProviderIndex = 0;
-      return;
-    }
-
-    const provider = API_PROVIDERS[currentProviderIndex];
+    const captureId = ++currentCaptureId;
     const device = deviceSelect.value;
     const delay = delaySelect.value;
-    const imageUrl = provider.buildUrl(url, device, delay);
 
     showLoading();
-    capturedUrlLabel.textContent = `📄 ${url}`;
+    capturedUrlLabel.textContent = \`📄 \${url}\`;
 
-    // Use fetch with a timeout to check if the image loads
-    const img = new Image();
-    const timeout = setTimeout(() => {
-      img.src = '';
-      currentProviderIndex++;
-      tryCapture();
-    }, 15000);
+    // Build all provider URLs
+    const attempts = API_PROVIDERS.map(p => ({
+      name: p.name,
+      src: p.buildUrl(url, device, delay)
+    }));
 
-    img.onload = function() {
-      clearTimeout(timeout);
-      hideLoading();
-      currentProviderIndex = 0; // reset for next capture
-      screenshotImg.src = imageUrl;
-      output.classList.add('active');
+    // Try each provider in parallel
+    for (const attempt of attempts) {
+      if (captureId !== currentCaptureId) return; // cancelled
 
-      // Clean up old blob URL
-      if (screenshotBlobUrl) {
-        URL.revokeObjectURL(screenshotBlobUrl);
-        screenshotBlobUrl = null;
+      try {
+        const img = await loadImage(attempt.src, 12000);
+        if (captureId !== currentCaptureId) return;
+
+        // Success!
+        hideLoading();
+        screenshotImg.src = attempt.src;
+        screenshotImg.alt = \`Screenshot of \${url}\`;
+        output.classList.add('active');
+
+        // Simple download via right-click or direct image open
+        downloadBtn.onclick = function() {
+          const link = document.createElement('a');
+          const domain = url.replace(/^https?:\/\//, '').split('/')[0].replace(/[^a-zA-Z0-9]/g, '_');
+          link.download = \`screenshot_\${domain}_\${Date.now()}.png\`;
+          link.href = attempt.src;
+          link.target = '_blank';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        };
+        return;
+      } catch (e) {
+        // Try next provider
+        continue;
       }
+    }
 
-      // For download, we need to fetch the image and create a blob
-      fetch(imageUrl)
-        .then(res => res.blob())
-        .then(blob => {
-          screenshotBlobUrl = URL.createObjectURL(blob);
-          downloadBtn.disabled = false;
-          downloadBtn.textContent = '⬇️ Download PNG';
-        })
-        .catch(() => {
-          // If fetch fails, try direct download via canvas
-          downloadBtn.disabled = false;
-          downloadBtn.textContent = '⬇️ Download PNG (direct)';
-        });
-    };
-
-    img.onerror = function() {
-      clearTimeout(timeout);
-      currentProviderIndex++;
-      tryCapture();
-    };
-
-    img.src = imageUrl;
+    // All providers failed
+    showError(
+      'Failed to capture screenshot. This may be due to network restrictions.',
+      'Tips: Try a different URL, or use your browser\'s built-in screenshot (right-click → Take Screenshot).'
+    );
   }
 
   captureBtn.addEventListener('click', function(e) {
     e.preventDefault();
-    currentProviderIndex = 0;
-    tryCapture();
+    captureScreenshot();
   });
 
   urlInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      currentProviderIndex = 0;
-      tryCapture();
+      captureScreenshot();
     }
   });
 
-  downloadBtn.addEventListener('click', function() {
-    const url = normalizeUrl(urlInput.value);
-    const imgSrc = screenshotImg.src;
-    if (!imgSrc) return;
-
-    // Use canvas to download
-    const canvas = document.createElement('canvas');
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = function() {
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0);
-      const link = document.createElement('a');
-      const domain = url.replace(/^https?:\/\//, '').split('/')[0].replace(/[^a-zA-Z0-9]/g, '_');
-      link.download = `screenshot_${domain}_${Date.now()}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    };
-    img.onerror = function() {
-      // Fallback: direct link
-      const link = document.createElement('a');
-      const domain = url.replace(/^https?:\/\//, '').split('/')[0].replace(/[^a-zA-Z0-9]/g, '_');
-      link.download = `screenshot_${domain}_${Date.now()}.png`;
-      link.href = imgSrc;
-      link.target = '_blank';
-      link.click();
-    };
-    img.src = imgSrc;
-  });
-
-  // Pre-populate with example URL
+  // Focus URL input and select all text
   urlInput.value = 'https://www.xiaoma001.us.ci';
-  urlInput.setSelectionRange(urlInput.value.length, urlInput.value.length);
+  urlInput.select();
 })();
 </script>
 </body>
