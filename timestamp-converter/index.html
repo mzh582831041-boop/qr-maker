@@ -57,6 +57,17 @@
       color: #999; line-height: 1.7; margin-bottom: 12px;
     }
     .tool-info strong { color: #ccc; }
+
+  .use-case { margin-bottom: 20px; padding: 15px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .use-case h3 { color: #fff; margin-bottom: 5px; font-size: 1rem; }
+  .use-case p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .faq-item { margin-bottom: 15px; padding: 12px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .faq-item h3 { color: #6c5ce7; font-size: 0.95rem; margin-bottom: 5px; cursor: pointer; }
+  .faq-item p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .tool-info ol { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ol li { margin: 8px 0; }
+  .tool-info ul { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ul li { margin: 8px 0; }
 </style>
   <script type="application/ld+json">
   {
@@ -120,7 +131,20 @@
       <div class="value" id="dateTsMs"></div>
     </div>
   </div>
-  <section class="tool-info">  <h2>How to Use the Timestamp Converter</h2>  <p>Enter a Unix timestamp (seconds or milliseconds) to see the corresponding date and time in multiple formats. Alternatively, pick a date using the date picker to get its Unix timestamp. Results update in real-time as you type.</p>  <p><strong>Perfect for:</strong> Developers debugging database timestamps, analyzing log files, working with API date formats, and converting between timezone representations.</p></section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
+  <section class="tool-info">
+  <h2>How to Use the Timestamp Converter</h2>
+  <ol><li><strong>Enter a timestamp:</strong> Type a Unix timestamp (in seconds) into the input field.</li><li><strong>View conversions:</strong> The tool automatically converts it to human-readable date and time in multiple formats.</li><li><strong>Reverse conversion:</strong> You can also enter a date and get the corresponding Unix timestamp.</li></ol>
+  <h2>Common Use Cases</h2>
+  <div class="use-case"><h3>🔧 Developers</h3><p>Debug API responses that use Unix timestamps. Convert between timestamp and readable date during development.</p></div>
+  <div class="use-case"><h3>📊 Data Analysts</h3><p>Process timestamp data from databases and logs. Understand when events occurred in your datasets.</p></div>
+  <div class="use-case"><h3>🗄️ Database Work</h3><p>MySQL, PostgreSQL, and many databases store dates as timestamps. Convert back and forth quickly.</p></div>
+  <h2>Key Features</h2>
+  <ul><li><strong>Bidirectional:</strong> Convert timestamp to date OR date to timestamp.</li><li><strong>Multiple formats:</strong> See the result in ISO 8601, US date, EU date, and more.</li><li><strong>Timezone support:</strong> Convert between different timezones.</li><li><strong>Client-side:</strong> All processing happens in your browser.</li><li><strong>Free & private:</strong> No signup, no server uploads.</li></ul>
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><h3>What is a Unix timestamp?</h3><p>A Unix timestamp is the number of seconds that have elapsed since January 1, 1970 (UTC), excluding leap seconds. It's a standard way to represent time in computing.</p></div>
+  <div class="faq-item"><h3>Is the timestamp converter free?</h3><p>Yes. It's completely free with no usage limits.</p></div>
+  <div class="faq-item"><h3>Does it support milliseconds?</h3><p>Yes. If you have a millisecond timestamp (e.g., 1700000000000), simply divide by 1000 first.</p></div>
+  </section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
 </div>
 <script>
 (function() {
