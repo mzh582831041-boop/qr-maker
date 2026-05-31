@@ -60,6 +60,17 @@
       color: #999; line-height: 1.7; margin-bottom: 12px;
     }
     .tool-info strong { color: #ccc; }
+
+  .use-case { margin-bottom: 20px; padding: 15px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .use-case h3 { color: #fff; margin-bottom: 5px; font-size: 1rem; }
+  .use-case p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .faq-item { margin-bottom: 15px; padding: 12px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .faq-item h3 { color: #6c5ce7; font-size: 0.95rem; margin-bottom: 5px; cursor: pointer; }
+  .faq-item p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .tool-info ol { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ol li { margin: 8px 0; }
+  .tool-info ul { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ul li { margin: 8px 0; }
 </style>
   <script type="application/ld+json">
   {
@@ -112,7 +123,20 @@
       <textarea id="outputText" placeholder="Result will appear here..." readonly></textarea>
     </div>
   </div>
-  <section class="tool-info">  <h2>How to Use the Base64 Encoder/Decoder</h2>  <p>Type or paste text into the input box. The tool instantly encodes it to Base64 format in real-time. To decode, click the "Switch to Decode" button and paste a Base64 string to convert it back to plain text.</p>  <p><strong>Common uses:</strong> Encoding binary data for email attachments, embedding images in HTML/CSS as data URIs, storing complex data in simple text formats, and debugging API responses.</p>  <p>This is a client-side tool — your data never leaves your browser.</p></section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
+  <section class="tool-info">
+  <h2>How to Use the Base64 Encoder</h2>
+  <ol><li><strong>Enter text:</strong> Type or paste any text into the input area.</li><li><strong>Encode:</strong> Click "Encode" to convert your text to Base64 format.</li><li><strong>Decode:</strong> Paste Base64 text and click "Decode" to get back the original text.</li><li><strong>Copy:</strong> Click the result to copy it to your clipboard.</li></ol>
+  <h2>Common Use Cases</h2>
+  <div class="use-case"><h3>🔐 Data Encoding</h3><p>Encode binary data (images, files) into text format for transmission over text-based protocols like email (MIME) and JSON APIs.</p></div>
+  <div class="use-case"><h3>🌐 Web Development</h3><p>Encode data for use in data URLs, API authentication headers, and secure cookie storage.</p></div>
+  <div class="use-case"><h3>🔑 Token Handling</h3><p>Many authentication tokens (JWT, Basic Auth) use Base64 encoding. Decode them to inspect their contents.</p></div>
+  <h2>Key Features</h2>
+  <ul><li><strong>Bidirectional:</strong> Encode and decode in one tool.</li><li><strong>UTF-8 support:</strong> Handles all Unicode characters including emojis.</li><li><strong>Instant results:</strong> No button clicking needed — updates in real-time.</li><li><strong>100% private:</strong> Your data never leaves your browser.</li><li><strong>No limits:</strong> Encode or decode text of any length.</li></ul>
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><h3>Is Base64 encryption?</h3><p>No. Base64 is encoding, not encryption. It converts binary data to text format for safe transmission. It should not be used to protect sensitive data.</p></div>
+  <div class="faq-item"><h3>Is this tool free?</h3><p>Yes. All encoding and decoding is completely free with no usage limits.</p></div>
+  <div class="faq-item"><h3>Is my data private?</h3><p>Yes. All operations happen in your browser. No data is sent to any server.</p></div>
+  </section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
 </div>
 <script>
 (function() {
