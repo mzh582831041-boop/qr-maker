@@ -55,6 +55,17 @@
       color: #999; line-height: 1.7; margin-bottom: 12px;
     }
     .tool-info strong { color: #ccc; }
+
+  .use-case { margin-bottom: 20px; padding: 15px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .use-case h3 { color: #fff; margin-bottom: 5px; font-size: 1rem; }
+  .use-case p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .faq-item { margin-bottom: 15px; padding: 12px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .faq-item h3 { color: #6c5ce7; font-size: 0.95rem; margin-bottom: 5px; cursor: pointer; }
+  .faq-item p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .tool-info ol { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ol li { margin: 8px 0; }
+  .tool-info ul { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ul li { margin: 8px 0; }
 </style>
   <script type="application/ld+json">
   {
@@ -98,7 +109,20 @@
     <div style="margin-top:20px;"><h3 style="color:#aaa;font-size:0.9rem;margin-bottom:10px;">🎯 Saved Colors</h3>
     <div class="palette" id="palette"></div></div>
   </div>
-  <section class="tool-info">  <h2>How to Use the Color Picker</h2>  <p>Click the color wheel or use the color input to select any color. The tool instantly displays its HEX, RGB, and HSL values. Click any value to copy it to your clipboard. Use the palette section to save and compare colors side by side.</p>  <p><strong>Great for:</strong> Web designers choosing color schemes, developers matching brand colors, UI designers creating consistent palettes, and anyone who needs exact color values.</p></section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
+  <section class="tool-info">
+  <h2>How to Use the Color Picker</h2>
+  <ol><li><strong>Pick a color:</strong> Click the color area or use the sliders (hue, saturation, lightness) to select any color.</li><li><strong>View values:</strong> The HEX, RGB, and HSL values are displayed and update in real-time.</li><li><strong>Copy values:</strong> Click any value to copy it to your clipboard for use in your design projects.</li></ol>
+  <h2>Who Uses This Tool?</h2>
+  <div class="use-case"><h3>🎨 Web Designers</h3><p>Pick and match colors for website designs. Use HEX values directly in CSS code. Create cohesive color palettes.</p></div>
+  <div class="use-case"><h3>🖌️ Graphic Designers</h3><p>Find exact colors for logos, branding, and marketing materials. Convert between color formats seamlessly.</p></div>
+  <div class="use-case"><h3>💻 App Developers</h3><p>Quickly get color values for UI elements. Match brand colors across mobile and web applications.</p></div>
+  <h2>Color Formats Explained</h2>
+  <ul><li><strong>HEX:</strong> Six-digit hexadecimal code (e.g., #6C5CE7). Most common in web development.</li><li><strong>RGB:</strong> Red, Green, Blue values from 0-255 (e.g., rgb(108,92,231)). Used in CSS and image editing.</li><li><strong>HSL:</strong> Hue (0-360), Saturation (0-100%), Lightness (0-100%). More intuitive for color manipulation.</li></ul>
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><h3>Is this color picker free?</h3><p>Yes. All features are completely free with no signup required.</p></div>
+  <div class="faq-item"><h3>Can I use picked colors commercially?</h3><p>Yes. Color values are not copyrighted. You can freely use any colors you pick in commercial projects.</p></div>
+  <div class="faq-item"><h3>Does it run in my browser only?</h3><p>Yes. The entire color picker runs client-side. Your color choices are not tracked or stored.</p></div>
+  </section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
 </div>
 <div class="toast" id="toast">Copied!</div>
 <script>
