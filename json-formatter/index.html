@@ -67,6 +67,17 @@
       color: #999; line-height: 1.7; margin-bottom: 12px;
     }
     .tool-info strong { color: #ccc; }
+
+  .use-case { margin-bottom: 20px; padding: 15px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .use-case h3 { color: #fff; margin-bottom: 5px; font-size: 1rem; }
+  .use-case p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .faq-item { margin-bottom: 15px; padding: 12px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .faq-item h3 { color: #6c5ce7; font-size: 0.95rem; margin-bottom: 5px; cursor: pointer; }
+  .faq-item p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .tool-info ol { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ol li { margin: 8px 0; }
+  .tool-info ul { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ul li { margin: 8px 0; }
 </style>
 <script src="/consent.js"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5276967064769484" crossorigin="anonymous"></script>
@@ -112,7 +123,20 @@ Example: {"name":"John","age":30}'></textarea>
 
   <div class="status" id="status"></div>
 
-  <section class="tool-info">  <h2>How to Use the JSON Formatter</h2>  <p>Paste your JSON data into the editor and click "Format" to beautify it with proper indentation. Use "Minify" to compress JSON for production use. The validator checks for syntax errors automatically.</p>  <p><strong>Essential for:</strong> Developers debugging API responses, analyzing configuration files, cleaning up minified JSON from web services, and teaching JSON structure to students.</p>  <p>Your JSON data stays in your browser — completely private and secure.</p></section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
+  <section class="tool-info">
+  <h2>How to Use the JSON Formatter</h2>
+  <ol><li><strong>Paste JSON:</strong> Copy and paste any JSON data into the text area.</li><li><strong>Auto-format:</strong> The tool automatically beautifies the JSON with proper indentation.</li><li><strong>Validate:</strong> Invalid JSON is highlighted with error messages to help you fix syntax issues.</li><li><strong>Copy result:</strong> Use the copy button to copy the formatted JSON to your clipboard.</li></ol>
+  <h2>Who Uses This Tool?</h2>
+  <div class="use-case"><h3>👨‍💻 Web Developers</h3><p>Format API responses, configuration files, and data structures for debugging and documentation.</p></div>
+  <div class="use-case"><h3>📊 Data Analysts</h3><p>Validate and beautify JSON datasets before importing into analysis tools or databases.</p></div>
+  <div class="use-case"><h3>🔧 QA Engineers</h3><p>Read and verify API responses during testing. Quickly spot malformed JSON in test results.</p></div>
+  <h2>Key Features</h2>
+  <ul><li><strong>Instant formatting:</strong> Paste JSON and see it beautified immediately.</li><li><strong>Error detection:</strong> Invalid JSON is flagged with specific error messages.</li><li><strong>Copy to clipboard:</strong> One-click copy of formatted output.</li><li><strong>Privacy:</strong> Your JSON never leaves your browser.</li><li><strong>No limits:</strong> Format JSON of any size (your browser's memory is the only limit).</li></ul>
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><h3>What is JSON formatting?</h3><p>JSON formatting (also called beautifying or pretty-printing) adds proper indentation, line breaks, and spacing to make raw JSON data human-readable.</p></div>
+  <div class="faq-item"><h3>Is JSON validation free?</h3><p>Yes. Our JSON formatter and validator is completely free with no usage limits or hidden charges.</p></div>
+  <div class="faq-item"><h3>Can I format large JSON files?</h3><p>Yes, as long as your browser can handle the file size. All processing is client-side, so there's no server-imposed limit.</p></div>
+  </section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
 </div>
 
 <script>
