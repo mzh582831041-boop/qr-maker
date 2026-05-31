@@ -75,6 +75,17 @@
       color: #999; line-height: 1.7; margin-bottom: 12px;
     }
     .tool-info strong { color: #ccc; }
+
+  .use-case { margin-bottom: 20px; padding: 15px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .use-case h3 { color: #fff; margin-bottom: 5px; font-size: 1rem; }
+  .use-case p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .faq-item { margin-bottom: 15px; padding: 12px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .faq-item h3 { color: #6c5ce7; font-size: 0.95rem; margin-bottom: 5px; cursor: pointer; }
+  .faq-item p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .tool-info ol { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ol li { margin: 8px 0; }
+  .tool-info ul { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ul li { margin: 8px 0; }
 </style>
 <script src="/consent.js"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5276967064769484" crossorigin="anonymous"></script>
@@ -154,7 +165,21 @@
     <button class="btn btn-success" id="downloadBtn">⬇ Download</button>
   </div>
 
-  <section class="tool-info">  <h2>How to Use the Image Converter</h2>  <p>Upload an image from your computer (supports PNG, JPG, WEBP, GIF). Select your target format and quality, then click convert. The converted image is available for instant download — nothing is uploaded to any server.</p>  <p><strong>Best for:</strong> Optimizing images for website performance, converting screenshots between formats, reducing file size for email attachments, and preparing images for social media platforms.</p>  <p>Your images never leave your device. All conversion is done client-side using the Canvas API.</p></section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
+  <section class="tool-info">
+  <h2>How to Use the Image Converter</h2>
+  <ol><li><strong>Upload:</strong> Click the upload area and select an image from your computer (PNG, JPG, WEBP supported).</li><li><strong>Choose format:</strong> Select your target format — PNG (lossless), JPG (smaller file), or WEBP (modern web format).</li><li><strong>Resize (optional):</strong> Enter a custom width in pixels. Height is automatically adjusted to maintain aspect ratio.</li><li><strong>Adjust quality:</strong> For JPG and WEBP, choose quality from 40% to 100%.</li><li><strong>Download:</strong> Click "Download" to save your converted image.</li></ol>
+  <h2>Common Use Cases</h2>
+  <div class="use-case"><h3>🌐 Web Optimization</h3><p>Convert images to WEBP format for faster website loading. Reduce file sizes without visible quality loss.</p></div>
+  <div class="use-case"><h3>📧 Email Attachments</h3><p>Resize and compress images to meet email attachment size limits. Convert to JPG at 80% quality for the best balance.</p></div>
+  <div class="use-case"><h3>🖼️ Social Media</h3><p>Resize images to platform-specific dimensions. Convert between formats to match platform requirements.</p></div>
+  <h2>Key Features</h2>
+  <ul><li><strong>100% client-side:</strong> Your images never leave your browser.</li><li><strong>Three formats:</strong> PNG, JPG, and WEBP conversion supported.</li><li><strong>Custom sizing:</strong> Resize while maintaining aspect ratio.</li><li><strong>Quality control:</strong> Adjust compression level for JPG/WEBP.</li><li><strong>Free & private:</strong> No signup, no uploads, no limits.</li></ul>
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><h3>Is my image uploaded to a server?</h3><p>No. All image conversion happens entirely in your browser using the HTML5 Canvas API. Your image never leaves your device.</p></div>
+  <div class="faq-item"><h3>What's the difference between PNG and JPG?</h3><p>PNG is lossless (higher quality, larger file), best for graphics with text and sharp edges. JPG is lossy (smaller file, slight quality loss), best for photographs.</p></div>
+  <div class="faq-item"><h3>What is WEBP format?</h3><p>WEBP is Google's modern image format that provides superior compression compared to PNG and JPG. It's supported by all major browsers.</p></div>
+  <div class="faq-item"><h3>Is there a file size limit?</h3><p>There is no server-side limit since all processing is local. However, very large images may be limited by your browser's available memory.</p></div>
+  </section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
 </div>
 
 <script>
