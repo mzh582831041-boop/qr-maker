@@ -65,6 +65,17 @@
       color: #999; line-height: 1.7; margin-bottom: 12px;
     }
     .tool-info strong { color: #ccc; }
+
+  .use-case { margin-bottom: 20px; padding: 15px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .use-case h3 { color: #fff; margin-bottom: 5px; font-size: 1rem; }
+  .use-case p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .faq-item { margin-bottom: 15px; padding: 12px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .faq-item h3 { color: #6c5ce7; font-size: 0.95rem; margin-bottom: 5px; cursor: pointer; }
+  .faq-item p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .tool-info ol { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ol li { margin: 8px 0; }
+  .tool-info ul { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ul li { margin: 8px 0; }
 </style>
   <script type="application/ld+json">
   {
@@ -117,7 +128,20 @@
       <div id="historyList"></div>
     </div>
   </div>
-  <section class="tool-info">  <h2>How to Use the Random Generator</h2>  <p>Select the type of random result you need — random number within a range, dice roll, coin flip, or random pick from your list. Results are displayed instantly with a history log showing recent outputs.</p>  <p><strong>Useful for:</strong> Games and board games needing dice rolls, random decision making, picking lottery numbers, selecting random winners for giveaways, and educational probability demonstrations.</p></section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
+  <section class="tool-info">
+  <h2>How to Use the Random Generator</h2>
+  <ol><li><strong>Choose mode:</strong> Select from Random Number, Dice Roll, Coin Flip, or Random Password.</li><li><strong>Set parameters:</strong> For numbers, set the range (min to max). For dice, choose how many dice to roll.</li><li><strong>Generate:</strong> Click the generate button for an instant random result.</li></ol>
+  <h2>Random Number Features</h2>
+  <ul><li><strong>Custom range:</strong> Set any minimum and maximum value for your random number.</li><li><strong>True randomness:</strong> Uses browser cryptographic random number generation.</li><li><strong>Dice simulation:</strong> Roll 1 to 6 dice at once with realistic random distribution.</li><li><strong>Coin flip:</strong> Heads or tails with 50/50 probability.</li></ul>
+  <h2>Common Use Cases</h2>
+  <div class="use-case"><h3>🎲 Games & Activities</h3><p>Roll dice for board games, RPGs, or classroom activities. Flip coins for decision-making.</p></div>
+  <div class="use-case"><h3>🎯 Random Selection</h3><p>Pick random winners for giveaways, select random participants, or make unbiased decisions.</p></div>
+  <div class="use-case"><h3>🔢 Lottery Numbers</h3><p>Generate random numbers within any range for lottery entries or contest drawings.</p></div>
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><h3>Is this truly random?</h3><p>Yes. We use your browser's built-in cryptographic random number generator, which provides cryptographically secure randomness.</p></div>
+  <div class="faq-item"><h3>Is the random generator free?</h3><p>Yes. All features are completely free with no usage limits.</p></div>
+  <div class="faq-item"><h3>Can I use it for lottery numbers?</h3><p>Yes. You can generate random numbers within any range. However, remember that lottery numbers are completely random — past results don't affect future draws.</p></div>
+  </section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
 </div>
 <script>
 (function() {
