@@ -62,6 +62,17 @@
       color: #999; line-height: 1.7; margin-bottom: 12px;
     }
     .tool-info strong { color: #ccc; }
+
+  .use-case { margin-bottom: 20px; padding: 15px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .use-case h3 { color: #fff; margin-bottom: 5px; font-size: 1rem; }
+  .use-case p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .faq-item { margin-bottom: 15px; padding: 12px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .faq-item h3 { color: #6c5ce7; font-size: 0.95rem; margin-bottom: 5px; cursor: pointer; }
+  .faq-item p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .tool-info ol { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ol li { margin: 8px 0; }
+  .tool-info ul { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ul li { margin: 8px 0; }
 </style>
   <script type="application/ld+json">
   {
@@ -108,7 +119,20 @@
     <button class="btn btn-primary" id="generateBtn">🔄 Generate Password</button>
     <button class="btn btn-success" id="copyBtn">📋 Copy to Clipboard</button>
   </div>
-  <section class="tool-info">  <h2>How to Use the Password Generator</h2>  <p>Adjust the password length using the slider (4-64 characters). Select which character types to include: uppercase letters, lowercase letters, numbers, and symbols. The strength indicator gives instant feedback on password security. Click "Copy to Clipboard" to use your new password.</p>  <p><strong>Best practices:</strong> Use at least 12 characters with a mix of all character types for strong security. Longer passwords (16+) are recommended for important accounts like email and banking.</p>  <p>All generation is done locally in your browser. No passwords are ever transmitted or stored.</p></section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
+  <section class="tool-info">
+  <h2>How to Use the Password Generator</h2>
+  <ol><li><strong>Set length:</strong> Drag the slider to choose password length (4 to 64 characters).</li><li><strong>Character types:</strong> Check which character sets to include: uppercase (A-Z), lowercase (a-z), numbers (0-9), and symbols (!@#$%...).</li><li><strong>Generate:</strong> Click "Generate Password" to create a new random password.</li><li><strong>Copy:</strong> Click "Copy to Clipboard" to save your password.</li><li><strong>Check strength:</strong> The strength indicator shows Weak, Medium, or Strong based on your settings.</li></ol>
+  <h2>Password Strength Guide</h2>
+  <div class="use-case"><h3>🔒 Strong (12+ chars, mixed types)</h3><p>Recommended for email, banking, and social media accounts. Use a mix of uppercase, lowercase, numbers, and symbols.</p></div>
+  <div class="use-case"><h3>⚠️ Medium (8-11 chars)</h3><p>Acceptable for low-risk accounts. Add more characters or character types to improve security.</p></div>
+  <div class="use-case"><h3>❌ Weak (under 8 chars)</h3><p>Not recommended. Short passwords can be cracked in seconds by modern hardware.</p></div>
+  <h2>Security Best Practices</h2>
+  <ul><li><strong>Use unique passwords:</strong> Never reuse the same password across multiple sites.</li><li><strong>Length matters:</strong> Aim for 16+ characters for critical accounts.</li><li><strong>Use a password manager:</strong> Let a manager save and auto-fill your strong passwords.</li><li><strong>Enable 2FA:</strong> Two-factor authentication adds an extra layer of security beyond passwords.</li></ul>
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><h3>Are these passwords truly random?</h3><p>Yes. Passwords are generated using your browser's cryptographic random number generator, ensuring true randomness.</p></div>
+  <div class="faq-item"><h3>Are my passwords saved or transmitted?</h3><p>No. Password generation happens entirely in your browser. No passwords are ever sent to any server or stored anywhere.</p></div>
+  <div class="faq-item"><h3>What's the ideal password length?</h3><p>For most purposes, 16 characters with a mix of character types provides excellent security. For high-value accounts, use 20+ characters.</p></div>
+  </section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
 </div>
 <script>
 (function() {
