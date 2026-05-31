@@ -76,6 +76,17 @@
       color: #999; line-height: 1.7; margin-bottom: 12px;
     }
     .tool-info strong { color: #ccc; }
+
+  .use-case { margin-bottom: 20px; padding: 15px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .use-case h3 { color: #fff; margin-bottom: 5px; font-size: 1rem; }
+  .use-case p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .faq-item { margin-bottom: 15px; padding: 12px; background: #1a1a1a; border-radius: 8px; border: 1px solid #2a2a2a; }
+  .faq-item h3 { color: #6c5ce7; font-size: 0.95rem; margin-bottom: 5px; cursor: pointer; }
+  .faq-item p { color: #999; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .tool-info ol { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ol li { margin: 8px 0; }
+  .tool-info ul { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
+  .tool-info ul li { margin: 8px 0; }
 </style>
   <script type="application/ld+json">
   {
@@ -140,9 +151,68 @@
 
   <section class="tool-info">
   <h2>How to Use the QR Code Generator</h2>
-  <p>Enter any URL or text in the input field, choose your preferred colors and size, then click "Generate QR Code" to create your custom QR code. You can download the result as a high-quality PNG image.</p>
-  <p><strong>Use cases:</strong> Share website links at events, add QR codes to business cards, create scannable WiFi credentials, or encode contact information for easy sharing.</p>
-  <p>All processing happens in your browser. No data is uploaded to any server.</p>
+  <p>Follow these simple steps to create your custom QR code:</p>
+  <ol>
+    <li><strong>Enter your content:</strong> Type or paste any URL (website link) or text message into the input field.</li>
+    <li><strong>Choose colors:</strong> Click the color pickers to customize the QR code color and background color to match your brand.</li>
+    <li><strong>Select size:</strong> Choose from Small (200x200), Medium (300x300), Large (400x400), or XL (500x500).</li>
+    <li><strong>Generate:</strong> Click the "Generate QR Code" button and your QR code will appear instantly.</li>
+    <li><strong>Download:</strong> Click "Download PNG" to save your QR code as a high-quality PNG image.</li>
+  </ol>
+
+  <h2>Popular Use Cases</h2>
+  <div class="use-case">
+    <h3>📇 Business Cards</h3>
+    <p>Add a QR code to your business card that links to your LinkedIn profile, portfolio website, or digital vCard. Recipients can scan it instantly with their phone camera — no app needed.</p>
+  </div>
+  <div class="use-case">
+    <h3>🌐 Restaurant Menus</h3>
+    <p>Create contactless digital menus by linking QR codes to your online menu or ordering page. Print them on table tents, window decals, or takeaway bags for a seamless dining experience.</p>
+  </div>
+  <div class="use-case">
+    <h3>📱 WiFi Sharing</h3>
+    <p>Generate a QR code containing your WiFi network name (SSID) and password. Print it and place it in your home, office, or Airbnb so guests can connect without typing credentials.</p>
+  </div>
+  <div class="use-case">
+    <h3>🎉 Event Registration</h3>
+    <p>Link QR codes to event registration pages, ticket purchase links, or check-in systems. Perfect for conferences, workshops, trade shows, and weddings.</p>
+  </div>
+
+  <h2>Why Choose Our QR Code Generator?</h2>
+  <ul>
+    <li><strong>100% Free:</strong> No hidden charges, no premium tiers, no credit card required.</li>
+    <li><strong>No Signup:</strong> Start creating QR codes immediately — no account registration needed.</li>
+    <li><strong>Customizable Colors:</strong> Choose any foreground and background color to match your brand identity.</li>
+    <li><strong>High Quality:</strong> Download crisp PNG images suitable for both digital and print use.</li>
+    <li><strong>Privacy First:</strong> All QR code generation happens locally in your browser. Nothing is uploaded to any server.</li>
+    <li><strong>No Expiration:</strong> Your QR codes never expire. They work as long as the URL or text they encode remains valid.</li>
+  </ul>
+
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item">
+    <h3>Do QR codes expire?</h3>
+    <p>No. Once you download your QR code as a PNG image, it is permanent. The QR code itself does not expire — it only depends on whether the URL or information you encoded remains accessible.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can I scan QR codes without an app?</h3>
+    <p>Yes. Modern smartphones (iPhone and Android) have built-in QR code scanners in the camera app. Simply open your camera and point it at the QR code to scan.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is my data private?</h3>
+    <p>Absolutely. All QR code generation happens entirely in your browser using JavaScript. None of the text or URLs you enter are sent to our server or any third party.</p>
+  </div>
+  <div class="faq-item">
+    <h3>What is the maximum text length?</h3>
+    <p>QR codes can encode up to approximately 4,296 alphanumeric characters. For URLs, this is more than enough for even the longest web addresses.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can I use these QR codes commercially?</h3>
+    <p>Yes. All QR codes generated on this site are free for personal and commercial use. There are no licensing restrictions or watermarks.</p>
+  </div>
+
+  <h2>Technical Details</h2>
+  <p>QR codes generated by this tool use the widely-adopted QR Code specification (ISO/IEC 18004). The generated PNG images are standard format compatible with all QR code scanners. Error correction level H (highest) is used by default, allowing up to 30% of the code to be damaged while remaining scannable.</p>
+  <p>All processing happens in your browser using the <strong>qrcodejs</strong> library. No data is uploaded to any server. Your privacy is always protected.</p>
 </section>
   <footer>
     <p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p>
