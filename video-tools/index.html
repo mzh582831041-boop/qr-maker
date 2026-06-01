@@ -132,18 +132,34 @@ const fsize = document.getElementById('fileSize');
 
 let file = null;
 
-// 关键：阻止浏览器默认行为（打开视频）
-['dragenter','dragover','dragleave','drop'].forEach(e => {
-  document.addEventListener(e, e => e.preventDefault());
-});
+// 阻止浏览器默认拖拽行为（防止打开视频）
+document.addEventListener('dragenter', e => e.preventDefault());
+document.addEventListener('dragover', e => e.preventDefault());
+document.addEventListener('dragleave', e => e.preventDefault());
+document.addEventListener('drop', e => e.preventDefault());
 
 dz.addEventListener('click', () => fi.click());
 
-dz.addEventListener('dragover', () => dz.classList.add('dragover'));
-dz.addEventListener('dragleave', () => dz.classList.remove('dragover'));
-dz.addEventListener('drop', (e) => {
+dz.addEventListener('dragover', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  dz.classList.add('dragover');
+});
+
+dz.addEventListener('dragleave', e => {
+  e.preventDefault();
+  e.stopPropagation();
   dz.classList.remove('dragover');
-  if (e.dataTransfer.files.length) loadFile(e.dataTransfer.files[0]);
+});
+
+dz.addEventListener('drop', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  dz.classList.remove('dragover');
+  const files = e.dataTransfer.files;
+  if (files.length > 0) {
+    loadFile(files[0]);
+  }
 });
 
 fi.addEventListener('change', (e) => {
