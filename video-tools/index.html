@@ -1,472 +1,378 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>视频转音频+字幕 - Free Online Tools</title>
-  <meta name="description" content="免费在线视频转音频和字幕工具。上传视频提取音频(WAV/MP3)，语音识别生成SRT字幕。全部在浏览器本地处理，不上传服务器。">
-  <meta name="google-adsense-account" content="ca-pub-5276967064769484">
-  <link rel="canonical" href="https://www.xiaoma001.us.ci/video-tools/">
-  <script src="/consent.js"></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5276967064769484" crossorigin="anonymous"></script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f0f0f; color: #fff; min-height: 100vh; }
-    .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-    header { text-align: center; padding: 30px 20px 10px; }
-    header h1 { font-size: 1.8rem; }
-    header p { color: #999; margin-top: 8px; font-size: 1rem; }
-    .back { color: #6c5ce7; text-decoration: none; display: inline-block; margin-bottom: 20px; font-size: 0.9rem; }
-    
-    /* Upload box */
-    .drop-zone {
-      border: 2px dashed #444; border-radius: 16px; padding: 50px 20px;
-      text-align: center; cursor: pointer; transition: all .3s;
-      background: #1a1a1a; margin: 20px 0;
-    }
-    .drop-zone:hover, .drop-zone.dragover { border-color: #6c5ce7; background: #1e1a2e; }
-    .drop-zone .icon { font-size: 3rem; margin-bottom: 10px; }
-    .drop-zone p { color: #888; }
-    .drop-zone .sub { font-size: 0.85rem; color: #666; margin-top: 5px; }
-    .file-info { display: none; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 15px; margin: 15px 0; }
-    .file-info.active { display: block; }
-    .file-info .name { color: #6c5ce7; font-weight: 600; }
-    .file-info .size { color: #999; font-size: 0.9rem; }
-    
-    /* Tabs */
-    .tabs { display: flex; gap: 10px; margin: 25px 0 15px; }
-    .tab { flex: 1; padding: 14px; border: 1px solid #333; border-radius: 10px; text-align: center; cursor: pointer; transition: all .2s; background: #1a1a1a; color: #888; }
-    .tab:hover { border-color: #555; }
-    .tab.active { border-color: #6c5ce7; background: #1e1a2e; color: #fff; font-weight: 600; }
-    
-    .panel { display: none; }
-    .panel.active { display: block; }
-    
-    .btn {
-      width: 100%; padding: 14px; border: none; border-radius: 10px;
-      color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background .2s; margin: 8px 0;
-    }
-    .btn-primary { background: #6c5ce7; }
-    .btn-primary:hover { background: #5a4bd1; }
-    .btn-success { background: #00b894; }
-    .btn-success:hover { background: #00a381; }
-    .btn-danger { background: #d63031; }
-    .btn-danger:hover { background: #c0392b; }
-    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    
-    .progress-bar { height: 6px; background: #2a2a2a; border-radius: 3px; margin: 15px 0; overflow: hidden; display: none; }
-    .progress-bar.active { display: block; }
-    .progress-bar .fill { height: 100%; width: 0%; background: linear-gradient(90deg, #6c5ce7, #00b894); border-radius: 3px; transition: width .3s; }
-    
-    .status { color: #999; font-size: 0.9rem; text-align: center; margin: 10px 0; min-height: 24px; }
-    
-    .result-box { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 20px; margin: 15px 0; display: none; }
-    .result-box.active { display: block; }
-    .result-box h3 { color: #6c5ce7; margin-bottom: 10px; }
-    .result-box .download-btn { display: inline-block; padding: 10px 24px; background: #00b894; color: #fff; border: none; border-radius: 8px; text-decoration: none; font-weight: 600; margin-right: 10px; margin-top: 5px; cursor: pointer; }
-    .result-box .download-btn:hover { background: #00a381; }
-    
-    .subtitle-preview { background: #2a2a2a; border-radius: 8px; padding: 15px; margin: 10px 0; max-height: 300px; overflow-y: auto; font-family: monospace; font-size: 0.85rem; color: #ccc; white-space: pre-wrap; display: none; }
-    .subtitle-preview.active { display: block; }
-    
-    .info-section { max-width: 700px; margin: 30px auto; padding: 0 20px; }
-    .info-section h2 { color: #fff; font-size: 1.2rem; margin: 25px 0 12px; }
-    .info-section p { color: #999; line-height: 1.7; margin-bottom: 12px; }
-    .info-section strong { color: #ccc; }
-    .info-section ol { color: #999; line-height: 1.8; margin: 10px 0 10px 20px; }
-    .info-section ol li { margin: 6px 0; }
-    
-    footer { text-align: center; padding: 30px; color: #555; font-size: 0.85rem; }
-    footer a { color: #555; text-decoration: none; }
-    
-    @media (max-width: 600px) {
-      header h1 { font-size: 1.4rem; }
-      .tabs { flex-direction: column; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>视频转音频+字幕 - Free Online Tools</title>
+<meta name="description" content="免费在线视频转音频和字幕工具。上传视频提取音频(WAV)，语音识别生成SRT字幕。全部在浏览器本地处理。">
+<meta name="google-adsense-account" content="ca-pub-5276967064769484">
+<link rel="canonical" href="https://www.xiaoma001.us.ci/video-tools/">
+<script src="/consent.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5276967064769484" crossorigin="anonymous"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f0f0f;color:#fff;min-height:100vh}
+.container{max-width:800px;margin:0 auto;padding:20px}
+header{text-align:center;padding:30px 20px 10px}
+header h1{font-size:1.8rem}
+header p{color:#999;margin-top:8px;font-size:1rem}
+.back{color:#6c5ce7;text-decoration:none;display:inline-block;margin-bottom:20px;font-size:0.9rem}
+.drop-zone{border:2px dashed #444;border-radius:16px;padding:50px 20px;text-align:center;cursor:pointer;transition:all .3s;background:#1a1a1a;margin:20px 0}
+.drop-zone:hover,.drop-zone.dragover{border-color:#6c5ce7;background:#1e1a2e}
+.drop-zone .icon{font-size:3rem;margin-bottom:10px}
+.drop-zone p{color:#888}
+.drop-zone .sub{font-size:0.85rem;color:#666;margin-top:5px}
+.file-info{display:none;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:15px;margin:15px 0}
+.file-info.active{display:block}
+.file-info .name{color:#6c5ce7;font-weight:600}
+.file-info .size{color:#999;font-size:0.9rem}
+.btn{width:100%;padding:14px;border:none;border-radius:10px;color:#fff;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s;margin:8px 0}
+.btn-primary{background:#6c5ce7}
+.btn-primary:hover{background:#5a4bd1}
+.btn-success{background:#00b894}
+.btn-success:hover{background:#00a381}
+.btn-danger{background:#d63031}
+.btn-danger:hover{background:#c0392b}
+.btn:disabled{opacity:0.4;cursor:not-allowed}
+.progress-bar{height:6px;background:#2a2a2a;border-radius:3px;margin:15px 0;overflow:hidden;display:none}
+.progress-bar.active{display:block}
+.progress-bar .fill{height:100%;width:0%;background:linear-gradient(90deg,#6c5ce7,#00b894);border-radius:3px;transition:width .3s}
+.status{color:#999;font-size:0.9rem;text-align:center;margin:10px 0;min-height:24px}
+.result-box{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:20px;margin:15px 0;display:none}
+.result-box.active{display:block}
+.result-box h3{color:#6c5ce7;margin-bottom:10px}
+.result-box .download-btn{display:inline-block;padding:10px 24px;background:#00b894;color:#fff;border:none;border-radius:8px;text-decoration:none;font-weight:600;margin:5px 10px 5px 0;cursor:pointer}
+.result-box .download-btn:hover{background:#00a381}
+.subtitle-preview{background:#2a2a2a;border-radius:8px;padding:15px;margin:10px 0;max-height:300px;overflow-y:auto;font-family:monospace;font-size:0.85rem;color:#ccc;white-space:pre-wrap;display:none}
+.subtitle-preview.active{display:block}
+.section{max-width:700px;margin:30px auto;padding:0 20px}
+.section h2{color:#fff;font-size:1.2rem;margin:25px 0 12px}
+.section p{color:#999;line-height:1.7;margin-bottom:12px}
+.section strong{color:#ccc}
+.section ol{color:#999;line-height:1.8;margin:10px 0 10px 20px}
+.section ol li{margin:6px 0}
+.recording{animation:pulse 1s infinite}
+@keyframes pulse{0%{opacity:1}50%{opacity:0.5}100%{opacity:1}}
+footer{text-align:center;padding:30px;color:#555;font-size:0.85rem}
+footer a{color:#555;text-decoration:none}
+@media(max-width:600px){header h1{font-size:1.4rem}}
+</style>
 </head>
 <body>
 <div class="container">
-  <a href="../" class="back">← 回到工具列表</a>
-  <header>
-    <h1>🎬 视频转音频+字幕</h1>
-    <p>上传视频，提取音频或生成字幕。全部在浏览器本地处理，不上传服务器</p>
-  </header>
-  
-  <!-- Upload Zone -->
-  <div class="drop-zone" id="dropZone">
-    <div class="icon">📁</div>
-    <p><strong>点击选择或拖拽视频文件到这里</strong></p>
-    <p class="sub">支持 MP4, WebM, MOV, AVI, MKV 等格式</p>
-  </div>
-  <input type="file" id="fileInput" accept="video/*" style="display:none">
-  
-  <div class="file-info" id="fileInfo">
-    <span class="name" id="fileName"></span>
-    <span class="size" id="fileSize"></span>
-  </div>
-  
-  <!-- Tabs -->
-  <div class="tabs">
-    <div class="tab active" data-tab="audio" id="tabAudio">🎵 提取音频</div>
-    <div class="tab" data-tab="subtitle" id="tabSubtitle">📜 生成字幕</div>
-  </div>
-  
-  <!-- Audio Panel -->
-  <div class="panel active" id="panelAudio">
-    <button class="btn btn-primary" id="extractBtn" disabled>🎵 提取音频</button>
-    <div class="progress-bar" id="extractProgress"><div class="fill" id="extractFill"></div></div>
-    <div class="status" id="extractStatus">请先上传视频文件</div>
-    <div class="result-box" id="audioResult">
-      <h3>✅ 音频提取完成</h3>
-      <a class="download-btn" id="downloadWav">⬇ 下载 WAV</a>
-    </div>
-  </div>
-  
-  <!-- Subtitle Panel -->
-  <div class="panel" id="panelSubtitle">
-    <div class="status" style="color:#888; margin-bottom:15px; background:#1a1a1a; padding:12px; border-radius:8px; border:1px solid #2a2a2a;">
-      ⚠️ 语音识别使用浏览器内置 API，准确率取决于音质。<br>
-      建议先用「提取音频」下载音频文件，再用于其他专业工具。
-    </div>
-    <button class="btn btn-primary" id="transcribeBtn" disabled>🎤 开始识别</button>
-    <button class="btn btn-danger" id="stopBtn" disabled>⏹ 停止识别</button>
-    <div class="subtitle-preview" id="subtitlePreview"></div>
-    <div class="status" id="transcribeStatus">请先上传视频文件</div>
-    <div class="result-box" id="subtitleResult">
-      <h3>✅ 字幕生成完成</h3>
-      <a class="download-btn" id="downloadSrt">⬇ 下载 SRT 字幕</a>
-    </div>
-  </div>
-  
-  <!-- Instructions -->
-  <section class="info-section">
-    <h2>如何使用</h2>
-    <ol>
-      <li><strong>上传视频：</strong>点击或拖拽视频文件到上传区域</li>
-      <li><strong>提取音频：</strong>点击「提取音频」按钮，下载 WAV 格式音频文件</li>
-      <li><strong>生成字幕：</strong>切换到「生成字幕」标签，点击「开始识别」，朗读内容将实时转为文字</li>
-      <li><strong>下载：</strong>识别完成后可下载 SRT 字幕文件</li>
-    </ol>
-    
-    <h2>隐私说明</h2>
-    <p><strong>所有处理均在您的浏览器本地完成。</strong>上传的视频文件不会被发送到任何服务器。您无需担心隐私泄露。</p>
-    
-    <h2>注意事项</h2>
-    <p>语音识别功能使用浏览器内置 API，建议使用 <strong>Chrome 或 Edge 浏览器</strong> 以获得最佳效果。识别的准确度受音频质量、语速、口音等因素影响。</p>
-  </section>
-  
-  <footer>
-    <p>Free Online Tools — 简单、快速、隐私</p>
-    <p style="margin-top:8px;">
-      <a href="../privacy.html">Privacy Policy</a> ·
-      <a href="../about.html">About</a> ·
-      <a href="../contact.html">Contact</a>
-    </p>
-  </footer>
+<a href="../" class="back">← 回到工具列表</a>
+<header>
+<h1>🎬 视频转音频+字幕</h1>
+<p>上传视频，提取音频或生成字幕。全部在浏览器处理，不上传服务器</p>
+</header>
+
+<div class="drop-zone" id="dropZone">
+<div class="icon">📁</div>
+<p><strong>点击选择或拖拽视频文件到这里</strong></p>
+<p class="sub">支持 MP4, WebM, MOV, AVI, MKV 等格式</p>
+</div>
+<input type="file" id="fileInput" accept="video/*" style="display:none">
+
+<div class="file-info" id="fileInfo">
+<span class="name" id="fileName"></span>
+<span class="size" id="fileSize"></span>
+</div>
+
+<!-- Audio Extraction -->
+<button class="btn btn-primary" id="extractBtn" disabled>🎵 提取音频 (WAV)</button>
+<div class="progress-bar" id="extractProgress"><div class="fill" id="extractFill"></div></div>
+<div class="status" id="extractStatus">请先上传视频文件</div>
+<div class="result-box" id="audioResult">
+<h3>✅ 音频提取完成</h3>
+<a class="download-btn" id="downloadWav">⬇ 下载 WAV 音频</a>
+</div>
+
+<div style="height:1px;background:#2a2a2a;margin:30px 0"></div>
+
+<!-- Speech Recognition -->
+<h2 style="margin-top:20px;text-align:center">📜 生成字幕</h2>
+<p style="color:#888;text-align:center;font-size:0.9rem;margin:5px 0 20px">通过麦克风识别视频声音，生成 SRT 字幕文件<br>播放视频声音 → 浏览器同时识别 → 下载字幕</p>
+
+<button class="btn btn-success" id="transcribeBtn" disabled>🎤 开始识别</button>
+<button class="btn btn-danger" id="stopBtn" disabled style="display:none">⏹ 停止识别</button>
+<div class="subtitle-preview" id="subtitlePreview"></div>
+<div class="status" id="transcribeStatus">请先上传视频文件</div>
+<div class="result-box" id="subtitleResult">
+<h3>✅ 字幕生成完成</h3>
+<a class="download-btn" id="downloadSrt">⬇ 下载 SRT 字幕</a>
+<button class="download-btn" id="copySrtBtn" style="background:#6c5ce7">📋 复制字幕</button>
+</div>
+
+<section class="section">
+<h2>如何使用</h2>
+<ol>
+<li><strong>上传视频：</strong>点击或拖拽视频文件到上传区域</li>
+<li><strong>提取音频：</strong>点击「提取音频」按钮，下载 WAV 格式音频文件</li>
+<li><strong>生成字幕：</strong>点击「开始识别」→ 播放视频声音 → 浏览器自动转录 → 完成后下载 SRT</li>
+</ol>
+<h2>隐私说明</h2>
+<p><strong>所有处理均在您的浏览器本地完成。</strong>视频文件不上传任何服务器。</p>
+<h2>注意事项</h2>
+<p>语音识别使用浏览器内置 API，建议用 <strong>Chrome 或 Edge</strong>。播放视频时确保麦克风能收声。</p>
+</section>
+
+<footer>
+<p>Free Online Tools</p>
+<p style="margin-top:8px"><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p>
+</footer>
 </div>
 
 <script>
-// ─── File Upload ───
-const dropZone = document.getElementById('dropZone');
-const fileInput = document.getElementById('fileInput');
-const fileInfo = document.getElementById('fileInfo');
-const fileName = document.getElementById('fileName');
-const fileSize = document.getElementById('fileSize');
+// ─── 文件上传 ───
+const dz = document.getElementById('dropZone');
+const fi = document.getElementById('fileInput');
+const finfo = document.getElementById('fileInfo');
+const fname = document.getElementById('fileName');
+const fsize = document.getElementById('fileSize');
 
-let uploadedFile = null;
-let audioBuffer = null;
-let recognition = null;
-let subtitleEntries = [];
-let startTime = 0;
+let file = null;
 
-dropZone.addEventListener('click', () => fileInput.click());
-dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
-dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); handleFile(e.dataTransfer.files[0]); });
-fileInput.addEventListener('change', (e) => { if (e.target.files.length) handleFile(e.target.files[0]); });
-
-function handleFile(file) {
-  if (!file.type.startsWith('video/')) {
-    alert('请上传视频文件');
-    return;
-  }
-  uploadedFile = file;
-  fileName.textContent = file.name;
-  fileSize.textContent = ' - ' + (file.size / 1024 / 1024).toFixed(1) + ' MB';
-  fileInfo.classList.add('active');
-  document.getElementById('extractBtn').disabled = false;
-  document.getElementById('transcribeBtn').disabled = false;
-  document.getElementById('extractStatus').textContent = '已就绪，点击按钮开始提取音频';
-  document.getElementById('transcribeStatus').textContent = '已就绪，点击按钮开始识别';
-}
-
-// ─── Tabs ───
-document.querySelectorAll('.tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById('panel' + tab.dataset.tab.charAt(0).toUpperCase() + tab.dataset.tab.slice(1)).classList.add('active');
-  });
+// 关键：阻止浏览器默认行为（打开视频）
+['dragenter','dragover','dragleave','drop'].forEach(e => {
+  document.addEventListener(e, e => e.preventDefault());
 });
 
-// ─── Audio Extraction ───
+dz.addEventListener('click', () => fi.click());
+
+dz.addEventListener('dragover', () => dz.classList.add('dragover'));
+dz.addEventListener('dragleave', () => dz.classList.remove('dragover'));
+dz.addEventListener('drop', (e) => {
+  dz.classList.remove('dragover');
+  if (e.dataTransfer.files.length) loadFile(e.dataTransfer.files[0]);
+});
+
+fi.addEventListener('change', (e) => {
+  if (e.target.files.length) loadFile(e.target.files[0]);
+});
+
+function loadFile(f) {
+  if (!f.type.startsWith('video/')) { alert('请上传视频文件'); return; }
+  file = f;
+  fname.textContent = f.name;
+  fsize.textContent = ' - ' + (f.size/1024/1024).toFixed(1) + ' MB';
+  finfo.classList.add('active');
+  document.getElementById('extractBtn').disabled = false;
+  document.getElementById('transcribeBtn').disabled = false;
+  document.getElementById('extractStatus').textContent = '已就绪';
+  document.getElementById('transcribeStatus').textContent = '已就绪';
+  document.getElementById('audioResult').classList.remove('active');
+  document.getElementById('subtitleResult').classList.remove('active');
+  document.getElementById('subtitlePreview').classList.remove('active');
+}
+
+// ─── 提取音频 ───
 document.getElementById('extractBtn').addEventListener('click', extractAudio);
 
 async function extractAudio() {
-  if (!uploadedFile) return;
-  
+  if (!file) return;
   const btn = document.getElementById('extractBtn');
-  const progress = document.getElementById('extractProgress');
+  const pb = document.getElementById('extractProgress');
   const fill = document.getElementById('extractFill');
-  const status = document.getElementById('extractStatus');
-  const result = document.getElementById('audioResult');
+  const st = document.getElementById('extractStatus');
+  const res = document.getElementById('audioResult');
   
   btn.disabled = true;
-  status.textContent = '正在解码视频音频...';
-  progress.classList.add('active');
-  fill.style.width = '30%';
+  st.textContent = '正在读取视频...';
+  pb.classList.add('active');
+  fill.style.width = '20%';
   
   try {
-    const arrayBuffer = await uploadedFile.arrayBuffer();
+    const buf = await file.arrayBuffer();
     fill.style.width = '50%';
-    status.textContent = '正在处理音频数据...';
+    st.textContent = '正在解码音频...';
     
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+    const ctx = new (AudioContext || webkitAudioContext)();
+    const audioBuf = await ctx.decodeAudioData(buf);
     fill.style.width = '80%';
-    status.textContent = '正在生成 WAV 文件...';
+    st.textContent = '正在生成 WAV...';
     
-    // Convert to WAV
-    const wavBlob = audioBufferToWav(audioBuffer);
+    // Convert to WAV mono 16-bit
+    const numCh = audioBuf.numberOfChannels;
+    const sr = audioBuf.sampleRate;
+    const len = audioBuf.length;
+    const data = new Float32Array(len);
+    // Mix to mono
+    for (let ch = 0; ch < numCh; ch++) {
+      const chData = audioBuf.getChannelData(ch);
+      for (let i = 0; i < len; i++) data[i] += chData[i] / numCh;
+    }
+    
+    // WAV header
+    const bufSize = len * 2;
+    const wav = new ArrayBuffer(44 + bufSize);
+    const v = new DataView(wav);
+    const w = (s, o) => { for (let i=0; i<s.length; i++) v.setUint8(o+i, s.charCodeAt(i)); };
+    w('RIFF',0); v.setUint32(4, 36+bufSize, true);
+    w('WAVE',8); w('fmt ',12); v.setUint32(16,16,true);
+    v.setUint16(20,1,true); v.setUint16(22,1,true); // mono
+    v.setUint32(24,sr,true); v.setUint32(28,sr*2,true);
+    v.setUint16(32,2,true); v.setUint16(34,16,true);
+    w('data',36); v.setUint32(40, bufSize, true);
+    
+    let off = 44;
+    for (let i = 0; i < len; i++) {
+      let s = Math.max(-1, Math.min(1, data[i]));
+      v.setInt16(off, s < 0 ? s*0x8000 : s*0x7FFF, true);
+      off += 2;
+    }
+    
+    const blob = new Blob([wav], {type:'audio/wav'});
     fill.style.width = '100%';
     
-    // Enable download
-    const url = URL.createObjectURL(wavBlob);
-    const downloadBtn = document.getElementById('downloadWav');
-    downloadBtn.href = url;
-    downloadBtn.download = uploadedFile.name.replace(/\.[^.]+$/, '') + '.wav';
+    const url = URL.createObjectURL(blob);
+    const dl = document.getElementById('downloadWav');
+    dl.href = url;
+    dl.download = file.name.replace(/\.[^.]+$/, '') + '.wav';
     
-    result.classList.add('active');
-    status.textContent = '✅ 音频提取完成！';
-    setTimeout(() => progress.classList.remove('active'), 500);
-  } catch (e) {
-    status.textContent = '❌ 提取失败: ' + e.message;
-    progress.classList.remove('active');
+    res.classList.add('active');
+    st.textContent = '✅ 完成！点击下载';
+    setTimeout(() => { pb.classList.remove('active'); fill.style.width='0%'; }, 500);
+  } catch(e) {
+    st.textContent = '❌ 失败: ' + e.message;
+    pb.classList.remove('active');
   }
   btn.disabled = false;
 }
 
-function audioBufferToWav(buffer) {
-  const numChannels = buffer.numberOfChannels;
-  const sampleRate = buffer.sampleRate;
-  const format = 1; // PCM
-  const bitDepth = 16;
-  
-  // Mix down to mono
-  const channelData = [];
-  for (let ch = 0; ch < numChannels; ch++) {
-    channelData.push(buffer.getChannelData(ch));
-  }
-  
-  const length = channelData[0].length;
-  const dataLength = length * (bitDepth / 8);
-  const headerLength = 44;
-  const totalLength = headerLength + dataLength;
-  
-  const arrayBuffer = new ArrayBuffer(totalLength);
-  const view = new DataView(arrayBuffer);
-  
-  // WAV header
-  writeString(view, 0, 'RIFF');
-  view.setUint32(4, totalLength - 8, true);
-  writeString(view, 8, 'WAVE');
-  writeString(view, 12, 'fmt ');
-  view.setUint32(16, 16, true);
-  view.setUint16(20, format, true);
-  view.setUint16(22, 1, true); // mono
-  view.setUint32(24, sampleRate, true);
-  view.setUint32(28, sampleRate * (bitDepth / 8), true);
-  view.setUint16(32, (bitDepth / 8), true);
-  view.setUint16(34, bitDepth, true);
-  writeString(view, 36, 'data');
-  view.setUint32(40, dataLength, true);
-  
-  // Mix channels to mono and write PCM data
-  let offset = 44;
-  for (let i = 0; i < length; i++) {
-    let sample = 0;
-    for (let ch = 0; ch < numChannels; ch++) {
-      sample += channelData[ch][i];
-    }
-    sample = Math.max(-1, Math.min(1, sample / numChannels));
-    sample = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
-    view.setInt16(offset, sample, true);
-    offset += 2;
-  }
-  
-  return new Blob([arrayBuffer], { type: 'audio/wav' });
-}
-
-function writeString(view, offset, str) {
-  for (let i = 0; i < str.length; i++) {
-    view.setUint8(offset + i, str.charCodeAt(i));
-  }
-}
-
-// ─── Speech Recognition ───
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-if (!SpeechRecognition) {
+// ─── 语音识别 ───
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+if (!SR) {
   document.getElementById('transcribeBtn').disabled = true;
-  document.getElementById('transcribeStatus').textContent = '❌ 您的浏览器不支持语音识别，请使用 Chrome 或 Edge';
+  document.getElementById('transcribeStatus').textContent = '❌ 请用 Chrome 或 Edge 浏览器';
 }
 
-document.getElementById('transcribeBtn').addEventListener('click', startTranscription);
-document.getElementById('stopBtn').addEventListener('click', stopTranscription);
+let recognition = null;
+let entries = [];
+let entryIdx = 1;
+let isRecognizing = false;
 
-function startTranscription() {
-  if (!SpeechRecognition) return;
+document.getElementById('transcribeBtn').addEventListener('click', startRec);
+document.getElementById('stopBtn').addEventListener('click', stopRec);
+document.getElementById('copySrtBtn').addEventListener('click', copySrt);
+
+function startRec() {
+  if (!SR || isRecognizing) return;
+  entries = []; entryIdx = 1;
   
-  subtitleEntries = [];
-  const preview = document.getElementById('subtitlePreview');
-  const status = document.getElementById('transcribeStatus');
-  const transcribeBtn = document.getElementById('transcribeBtn');
+  const btn = document.getElementById('transcribeBtn');
   const stopBtn = document.getElementById('stopBtn');
-  const result = document.getElementById('subtitleResult');
+  const preview = document.getElementById('subtitlePreview');
+  const st = document.getElementById('transcribeStatus');
+  const res = document.getElementById('subtitleResult');
   
   preview.classList.add('active');
-  preview.textContent = '';
-  result.classList.remove('active');
-  transcribeBtn.disabled = true;
+  preview.textContent = '等待语音...';
+  res.classList.remove('active');
+  btn.style.display = 'none';
+  stopBtn.style.display = 'block';
   stopBtn.disabled = false;
-  status.textContent = '🎤 正在聆听... 请播放视频声音';
+  st.innerHTML = '🎤 <span class="recording">正在聆听...请播放视频声音</span>';
+  isRecognizing = true;
   
-  recognition = new SpeechRecognition();
+  recognition = new SR();
   recognition.lang = 'zh-CN';
   recognition.continuous = true;
   recognition.interimResults = true;
   
-  let entryIndex = 1;
-  let lastTimestamp = Date.now();
+  let startTime = Date.now();
   
   recognition.onresult = (event) => {
     let interim = '';
-    let finalText = '';
-    
     for (let i = event.resultIndex; i < event.results.length; i++) {
-      const result = event.results[i];
-      if (result.isFinal) {
+      const r = event.results[i];
+      if (r.isFinal) {
         const now = Date.now();
-        const duration = (now - lastTimestamp) / 1000;
-        const start = subtitleEntries.reduce((sum, e) => sum + e.duration, 0);
-        
-        subtitleEntries.push({
-          index: entryIndex++,
-          text: result[0].transcript,
-          start: start,
-          duration: duration || 2
+        const elapsed = (now - startTime) / 1000;
+        entries.push({
+          idx: entryIdx++,
+          text: r[0].transcript,
+          start: Math.max(0, elapsed - 3),
+          end: elapsed
         });
-        lastTimestamp = now;
-        finalText += ' ' + result[0].transcript;
+        startTime = now;
       } else {
-        interim += result[0].transcript;
+        interim = r[0].transcript;
       }
     }
     
-    // Update preview
-    let display = '';
-    for (const entry of subtitleEntries) {
-      const s = formatTimeSRT(entry.start);
-      const e = formatTimeSRT(entry.start + entry.duration);
-      display += entry.index + '
-' + s + ' --> ' + e + '
-' + entry.text + '
-
-';
-    }
-    if (interim) {
-      display += '... ' + interim;
-    }
-    preview.textContent = display || '等待语音输入...';
-    status.textContent = '🎤 识别中... 已识别 ' + subtitleEntries.length + ' 条';
+    // Render preview
+    let html = '';
+    entries.forEach(e => {
+      html += e.idx + '\n' + fmtTime(e.start) + ' --> ' + fmtTime(e.end) + '\n' + e.text + '\n\n';
+    });
+    if (interim) html += '... ' + interim;
+    preview.textContent = html || '等待语音...';
+    st.textContent = '🎤 识别中... 已识别 ' + entries.length + ' 条';
   };
   
-  recognition.onerror = (event) => {
-    status.textContent = '❌ 识别错误: ' + event.error;
-    stopTranscription();
+  recognition.onerror = (e) => {
+    st.textContent = '❌ 错误: ' + e.error;
+    stopRec();
   };
   
   recognition.onend = () => {
-    if (subtitleEntries.length > 0) {
-      finishTranscription();
-    } else {
-      status.textContent = '未检测到语音，请确保麦克风可用并播放视频声音';
-      transcribeBtn.disabled = false;
-      stopBtn.disabled = true;
+    isRecognizing = false;
+    if (entries.length > 0) finishRec();
+    else {
+      st.textContent = '未检测到语音，请确保麦克风可用';
+      document.getElementById('transcribeBtn').style.display = 'block';
+      document.getElementById('stopBtn').style.display = 'none';
     }
   };
   
   recognition.start();
 }
 
-function stopTranscription() {
-  if (recognition) {
-    recognition.stop();
-    recognition = null;
-  }
-  if (subtitleEntries.length > 0) {
-    finishTranscription();
-  } else {
-    document.getElementById('transcribeBtn').disabled = false;
-    document.getElementById('stopBtn').disabled = true;
-    document.getElementById('transcribeStatus').textContent = '已停止';
-  }
+function stopRec() {
+  if (recognition) { recognition.stop(); recognition = null; }
+  isRecognizing = false;
+  document.getElementById('transcribeBtn').style.display = 'block';
+  document.getElementById('stopBtn').style.display = 'none';
 }
 
-function finishTranscription() {
-  const status = document.getElementById('transcribeStatus');
-  const transcribeBtn = document.getElementById('transcribeBtn');
-  const stopBtn = document.getElementById('stopBtn');
-  const result = document.getElementById('subtitleResult');
+function finishRec() {
   const preview = document.getElementById('subtitlePreview');
+  const st = document.getElementById('transcribeStatus');
+  const res = document.getElementById('subtitleResult');
   
-  stopBtn.disabled = true;
-  transcribeBtn.disabled = false;
+  document.getElementById('transcribeBtn').style.display = 'block';
+  document.getElementById('stopBtn').style.display = 'none';
   
-  // Generate SRT
-  let srtContent = '';
-  for (const entry of subtitleEntries) {
-    const s = formatTimeSRT(entry.start);
-    const e = formatTimeSRT(entry.start + entry.duration);
-    srtContent += entry.index + '
-' + s + ' --> ' + e + '
-' + entry.text + '
-
-';
-  }
+  let srt = '';
+  entries.forEach(e => {
+    srt += e.idx + '\n' + fmtTime(e.start) + ' --> ' + fmtTime(e.end) + '\n' + e.text + '\n\n';
+  });
   
-  // Store for download
-  const blob = new Blob([srtContent], { type: 'text/plain;charset=utf-8' });
+  const blob = new Blob([srt], {type:'text/plain;charset=utf-8'});
   const url = URL.createObjectURL(blob);
-  const downloadBtn = document.getElementById('downloadSrt');
-  downloadBtn.href = url;
-  downloadBtn.download = (uploadedFile ? uploadedFile.name.replace(/\.[^.]+$/, '') : 'subtitle') + '.srt';
+  const dl = document.getElementById('downloadSrt');
+  dl.href = url;
+  dl.download = (file ? file.name.replace(/\.[^.]+$/, '') : 'subtitle') + '.srt';
   
-  result.classList.add('active');
-  preview.textContent = srtContent;
-  status.textContent = '✅ 字幕生成完成！共 ' + subtitleEntries.length + ' 条';
+  preview.textContent = srt;
+  res.classList.add('active');
+  st.textContent = '✅ 完成！共 ' + entries.length + ' 条字幕';
+  
+  // Store for copy
+  window._srtContent = srt;
 }
 
-function formatTimeSRT(seconds) {
-  const h = Math.floor(seconds / 3600);
-  const m = Math.floor((seconds % 3600) / 60);
-  const s = Math.floor(seconds % 60);
-  const ms = Math.floor((seconds % 1) * 1000);
-  return String(h).padStart(2, '0') + ':' + 
-         String(m).padStart(2, '0') + ':' + 
-         String(s).padStart(2, '0') + ',' + 
-         String(ms).padStart(3, '0');
+function copySrt() {
+  if (!window._srtContent) return;
+  navigator.clipboard.writeText(window._srtContent).then(() => {
+    document.getElementById('copySrtBtn').textContent = '✅ 已复制';
+    setTimeout(() => { document.getElementById('copySrtBtn').textContent = '📋 复制字幕'; }, 2000);
+  });
+}
+
+function fmtTime(s) {
+  const h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = Math.floor(s%60), ms = Math.floor((s%1)*1000);
+  return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0')+','+String(ms).padStart(3,'0');
 }
 </script>
 </body>
