@@ -144,7 +144,29 @@
   <div class="faq-item"><h3>What is a Unix timestamp?</h3><p>A Unix timestamp is the number of seconds that have elapsed since January 1, 1970 (UTC), excluding leap seconds. It's a standard way to represent time in computing.</p></div>
   <div class="faq-item"><h3>Is the timestamp converter free?</h3><p>Yes. It's completely free with no usage limits.</p></div>
   <div class="faq-item"><h3>Does it support milliseconds?</h3><p>Yes. If you have a millisecond timestamp (e.g., 1700000000000), simply divide by 1000 first.</p></div>
-  </section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
+  
+  <h2>What Is a Unix Timestamp?</h2>
+  <p>A Unix timestamp (also called POSIX time or epoch time) represents the number of seconds that have elapsed since January 1, 1970, 00:00:00 UTC (coordinated universal time), excluding leap seconds. This system provides a simple, standardized way to represent time across different systems and time zones.</p>
+  <p>Unix timestamps are widely used in programming, databases, APIs, and log files because they are independent of time zones and easy to compare mathematically.</p>
+
+  <h2>Time Zone Conversion</h2>
+  <p>Unix timestamps are always based on UTC. To convert to a local time zone, add or subtract the time zone offset. For example, Eastern Standard Time (EST) is UTC-5, meaning you subtract 5 hours from the UTC time.</p>
+  <p>Our timestamp converter automatically handles time zone conversions, displaying the result in multiple formats for your convenience.</p>
+
+  <h2>Developer Examples</h2>
+  <p><strong>Database queries:</strong> MySQL stores timestamps as Unix time. Use FROM_UNIXTIME() to convert in queries.<br>
+  <strong>API responses:</strong> Most REST APIs return timestamps in Unix format. Convert to human-readable dates when displaying to users.<br>
+  <strong>Log analysis:</strong> Server logs use timestamps for event correlation. Our converter helps identify when events occurred.</p>
+
+  <h2>Common Timestamp Ranges</h2>
+  <ul>
+    <li>January 1, 2020: 1577836800</li>
+    <li>January 1, 2024: 1704067200</li>
+    <li>January 1, 2025: 1735689600</li>
+    <li>January 1, 2026: 1767225600</li>
+  </ul>
+
+</section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
 </div>
 <script>
 (function() {
