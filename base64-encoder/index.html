@@ -136,7 +136,30 @@
   <div class="faq-item"><h3>Is Base64 encryption?</h3><p>No. Base64 is encoding, not encryption. It converts binary data to text format for safe transmission. It should not be used to protect sensitive data.</p></div>
   <div class="faq-item"><h3>Is this tool free?</h3><p>Yes. All encoding and decoding is completely free with no usage limits.</p></div>
   <div class="faq-item"><h3>Is my data private?</h3><p>Yes. All operations happen in your browser. No data is sent to any server.</p></div>
-  </section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
+  
+  <h2>What Is Base64 Encoding?</h2>
+  <p>Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It is commonly used for transmitting data over media that are designed to handle text, such as email attachments (MIME), JSON APIs, and data URLs in web pages.</p>
+  <p>Base64 encoding increases data size by approximately 33% because it converts every 3 bytes of binary data into 4 characters of text. Despite this overhead, it remains essential for many data transmission scenarios.</p>
+
+  <h2>How Base64 Works</h2>
+  <p>Base64 uses 64 characters (A-Z, a-z, 0-9, +, /) plus the = sign for padding. The encoding process:</p>
+  <ol>
+    <li>Binary data is divided into groups of 3 bytes (24 bits)</li>
+    <li>Each 24-bit group is split into four 6-bit values</li>
+    <li>Each 6-bit value is mapped to a Base64 character</li>
+    <li>If the last group has fewer than 3 bytes, padding (=) is added</li>
+  </ol>
+
+  <h2>Common Development Use Cases</h2>
+  <p><strong>Data URLs:</strong> Embed images directly in HTML or CSS using data: URLs with Base64 encoding. Useful for small icons and sprites.</p>
+  <p><strong>JWT Tokens:</strong> JSON Web Tokens use Base64url encoding for their header, payload, and signature components.</p>
+  <p><strong>API Authentication:</strong> HTTP Basic Authentication encodes username:password pairs using Base64.</p>
+  <p><strong>Email Attachments:</strong> MIME encoding uses Base64 to send binary files via email.</p>
+
+  <h2>Important Security Note</h2>
+  <p>Base64 is encoding, not encryption. It converts data to a text format for safe transmission but does not provide any security. Never use Base64 alone to protect sensitive information. Always use proper encryption (AES, etc.) for sensitive data.</p>
+
+</section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
 </div>
 <script>
 (function() {
