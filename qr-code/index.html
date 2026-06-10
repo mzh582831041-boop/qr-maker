@@ -228,3 +228,60 @@
   <div class="faq-item"><h3>QR code on curved surfaces</h3><p>Printing QR codes on curved surfaces like coffee mugs or bottles can distort the pattern and prevent scanning. Consider using a flat label or testing before production.</p></div>
   <div class="faq-item"><h3>No fallback for dynamic content</h3><p>If you expect the destination URL to change, consider using a dynamic QR code service that allows you to update the link without reprinting. Our static QR codes are permanent and cannot be changed.</p></div>
   </section>
+  <h2>Pro Tips for Better QR Codes</h2>
+  <ul>
+    <li><strong>Test before printing:</strong> Always scan your QR code with multiple devices before mass printing.</li>
+    <li><strong>Maintain contrast:</strong> Ensure sufficient contrast between QR code color and background. Dark on light scans best.</li>
+    <li><strong>Leave margin space:</strong> Keep a clear margin of at least 4 modules around your QR code.</li>
+    <li><strong>Use short URLs:</strong> Shorten URLs before encoding to create simpler, more reliable QR codes.</li>
+    <li><strong>Avoid low-contrast colors:</strong> Light colors on white backgrounds will not scan reliably.</li>
+  </ul>
+  <h2>Common QR Code Mistakes to Avoid</h2>
+  <div class="faq-item"><h3>QR code is too small</h3><p>A QR code should be at least 2x2 cm for print. For digital use, ensure it is large enough to scan on mobile screens.</p></div>
+  <div class="faq-item"><h3>QR code on curved surfaces</h3><p>Printing on curved surfaces can distort the pattern. Test before mass production.</p></div>
+  <div class="faq-item"><h3>No fallback for changed URLs</h3><p>Our QR codes are static and permanent. Ensure the URL will not change before printing.</p></div>
+  </section>
+  <footer>
+    <p><a href="../privacy.html">Privacy Policy</a> - <a href="../about.html">About</a> - <a href="../contact.html">Contact</a></p>
+  </footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script>
+const textInput = document.getElementById("textInput");
+const fgColor = document.getElementById("fgColor");
+const bgColor = document.getElementById("bgColor");
+const sizeSelect = document.getElementById("sizeSelect");
+const generateBtn = document.getElementById("generateBtn");
+const qrOutput = document.getElementById("qrOutput");
+const qrContainer = document.getElementById("qrContainer");
+const downloadBtn = document.getElementById("downloadBtn");
+let currentQR = null;
+generateBtn.addEventListener("click", generateQR);
+textInput.addEventListener("keydown", (e) => { if (e.key === "Enter") generateQR(); });
+function generateQR() {
+  const text = textInput.value.trim();
+  if (!text) { textInput.focus(); return; }
+  const size = parseInt(sizeSelect.value);
+  qrContainer.innerHTML = "";
+  currentQR = new QRCode(qrContainer, {
+    text, width: size, height: size,
+    colorDark: fgColor.value, colorLight: bgColor.value,
+    correctLevel: QRCode.CorrectLevel.H
+  });
+  qrOutput.classList.add("active");
+}
+downloadBtn.addEventListener("click", () => {
+  const img = qrContainer.querySelector("img");
+  if (!img) return;
+  const canvas = document.createElement("canvas");
+  canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = bgColor.value; ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(img, 0, 0);
+  const a = document.createElement("a");
+  a.href = canvas.toDataURL("image/png"); a.download = "qrcode.png"; a.click();
+});
+setTimeout(() => { textInput.value = "https://example.com"; generateQR(); }, 500);
+</script>
+</body>
+</html>
