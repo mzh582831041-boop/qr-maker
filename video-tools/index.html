@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>视频转音频+字幕 - Free Online Tools</title>
-<meta name="description" content="免费在线视频转音频和字幕工具。上传视频提取音频(WAV)，语音识别生成SRT字幕。全部在浏览器本地处理。">
+<title>Video to Audio & Subtitle - Free Online Tools</title>
+<meta name="description" content="Upload video, extract audio (WAV), and generate SRT subtitles. All processing in your browser, no uploads to server.">
 <meta name="google-adsense-account" content="ca-pub-5276967064769484">
 <link rel="canonical" href="https://www.xiaoma001.us.ci/video-tools/">
 <script src="/consent.js"></script>
@@ -70,16 +70,16 @@ footer a{color:#555;text-decoration:none}
   </script></head>
 <body>
 <div class="container">
-<a href="../" class="back">← 回到工具列表</a>
+<a href="../" class="back">← Back to Tools</a>
 <header>
-<h1>🎬 视频转音频+字幕</h1>
-<p>上传视频，提取音频或生成字幕。全部在浏览器处理，不上传服务器</p>
+<h1>🎬 Video to Audio & Subtitle</h1>
+<p>Upload video, extract audio or generate subtitles. All in your browser, no uploads.</p>
 </header>
 
 <div class="drop-zone" id="dropZone">
 <div class="icon">📁</div>
-<p><strong>点击选择或拖拽视频文件到这里</strong></p>
-<p class="sub">支持 MP4, WebM, MOV, AVI, MKV 等格式</p>
+<p><strong>Click or drag a video file here</strong></p>
+<p class="sub">Supports MP4, WebM, MOV, AVI, MKV and more</p>
 </div>
 <input type="file" id="fileInput" accept="video/*" style="display:none">
 
@@ -89,52 +89,52 @@ footer a{color:#555;text-decoration:none}
 </div>
 
 <!-- Audio Extraction -->
-<button class="btn btn-primary" id="extractBtn" disabled>🎵 提取音频 (WAV)</button>
+<button class="btn btn-primary" id="extractBtn" disabled>🎵 Extract Audio (WAV)</button>
 <div class="progress-bar" id="extractProgress"><div class="fill" id="extractFill"></div></div>
-<div class="status" id="extractStatus">请先上传视频文件</div>
+<div class="status" id="extractStatus">Please upload a video file first</div>
 <div class="result-box" id="audioResult">
-<h3>✅ 音频提取完成</h3>
-<a class="download-btn" id="downloadWav">⬇ 下载 WAV 音频</a>
+<h3>✅ Audio Extracted</h3>
+<a class="download-btn" id="downloadWav">⬇ Download WAV</a>
 </div>
 
 <div style="height:1px;background:#2a2a2a;margin:30px 0"></div>
 
 <!-- Speech Recognition -->
-<h2 style="margin-top:20px;text-align:center">📜 生成字幕</h2>
+<h2 style="margin-top:20px;text-align:center">📜 Generate Subtitles</h2>
 <div style="background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:20px;margin:10px 0">
 <p style="color:#ccc;font-size:0.95rem;line-height:1.6">
 <strong style="color:#6c5ce7">🎤 使用说明：</strong><br>
-1️⃣ 点击下方「开始识别」→ 浏览器会请求麦克风权限 → 点击「允许」<br>
-2️⃣ 然后用其他播放器播放视频的声音<br>
-3️⃣ 浏览器会通过麦克风听取并自动转成文字<br>
-4️⃣ 完成后点击「停止识别」→ 下载 SRT 字幕文件
+1️⃣ Click "Start" → Allow microphone access when prompted<br>
+2️⃣ Play the video audio on your computer<br>
+3️⃣ Browser listens via mic and transcribes automatically<br>
+4️⃣ Click "Stop" → Download SRT file
 </p>
 <p style="color:#888;font-size:0.85rem;margin-top:10px">
-⚠️ 需要 Chrome 或 Edge 浏览器，确保麦克风已连接并可正常工作
+⚠️ Requires Chrome or Edge. Make sure your microphone is connected and working.
 </p>
 </div>
 
-<button class="btn btn-success" id="transcribeBtn" disabled>🎤 开始识别（需要麦克风权限）</button>
-<button class="btn btn-danger" id="stopBtn" disabled style="display:none">⏹ 停止识别</button>
+<button class="btn btn-success" id="transcribeBtn" disabled>🎤 Start Recognition (mic required)</button>
+<button class="btn btn-danger" id="stopBtn" disabled style="display:none">⏹ Stop</button>
 <div class="subtitle-preview" id="subtitlePreview"></div>
-<div class="status" id="transcribeStatus">请先上传视频文件</div>
+<div class="status" id="transcribeStatus">Please upload a video file first</div>
 <div class="result-box" id="subtitleResult">
-<h3>✅ 字幕生成完成</h3>
-<a class="download-btn" id="downloadSrt">⬇ 下载 SRT 字幕</a>
-<button class="download-btn" id="copySrtBtn" style="background:#6c5ce7">📋 复制字幕</button>
+<h3>✅ Subtitles Generated</h3>
+<a class="download-btn" id="downloadSrt">⬇ Download SRT</a>
+<button class="download-btn" id="copySrtBtn" style="background:#6c5ce7">📋 Copy Subtitles</button>
 </div>
 
 <section class="section">
-<h2>如何使用</h2>
+<h2>How to Use</h2>
 <ol>
-<li><strong>上传视频：</strong>点击或拖拽视频文件到上传区域</li>
-<li><strong>提取音频：</strong>点击「提取音频」按钮，下载 WAV 格式音频文件</li>
-<li><strong>生成字幕：</strong>点击「开始识别」→ 允许麦克风权限 → 播放视频声音 → 浏览器自动转录 → 完成后点击停止 → 下载 SRT</li>
+<li><strong>Upload:</strong> Click or drag a video file</li>
+<li><strong>Extract Audio:</strong> Click "Extract Audio" button, download WAV file</li>
+<li><strong>Subtitles:</strong> Click "Start" → Allow mic → Play video → Stop when done → Download SRT</li>
 </ol>
-<h2>隐私说明</h2>
-<p><strong>所有处理均在您的浏览器本地完成。</strong>视频文件不上传任何服务器。</p>
-<h2>注意事项</h2>
-<p>语音识别使用浏览器内置 API，建议用 <strong>Chrome 或 Edge</strong>。播放视频时确保麦克风能收声。</p>
+<h2>Privacy</h2>
+<p><strong>All processing is done in your browser.</strong> No files are uploaded to any server.</p>
+<h2>Notes</h2>
+<p>Speech recognition uses the browser API. Use <strong>Chrome or Edge</strong>. Ensure your mic can hear the audio.</p>
 </section>
 
 
@@ -410,7 +410,7 @@ function copySrt() {
   if (!window._srtContent) return;
   navigator.clipboard.writeText(window._srtContent).then(() => {
     document.getElementById('copySrtBtn').textContent = '✅ 已复制';
-    setTimeout(() => { document.getElementById('copySrtBtn').textContent = '📋 复制字幕'; }, 2000);
+    setTimeout(() => { document.getElementById('copySrtBtn').textContent = '📋 Copy Subtitles'; }, 2000);
   });
 }
 
