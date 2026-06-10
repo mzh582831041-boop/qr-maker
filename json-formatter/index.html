@@ -136,7 +136,30 @@ Example: {"name":"John","age":30}'></textarea>
   <div class="faq-item"><h3>What is JSON formatting?</h3><p>JSON formatting (also called beautifying or pretty-printing) adds proper indentation, line breaks, and spacing to make raw JSON data human-readable.</p></div>
   <div class="faq-item"><h3>Is JSON validation free?</h3><p>Yes. Our JSON formatter and validator is completely free with no usage limits or hidden charges.</p></div>
   <div class="faq-item"><h3>Can I format large JSON files?</h3><p>Yes, as long as your browser can handle the file size. All processing is client-side, so there's no server-imposed limit.</p></div>
-  </section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
+  
+  <h2>What Is JSON?</h2>
+  <p>JSON (JavaScript Object Notation) is a lightweight data interchange format that has become the standard for web APIs, configuration files, and data storage. Its simple syntax makes it easy for humans to read and write, while remaining efficient for machines to parse and generate.</p>
+  <p>JSON is language-independent but uses conventions familiar to programmers in C, Java, Python, and many other languages. This makes it an ideal format for data exchange between different systems and programming languages.</p>
+
+  <h2>JSON Syntax Rules</h2>
+  <p>Understanding JSON syntax is essential for working with data. Key rules include:</p>
+  <ul>
+    <li>Data is organized in key-value pairs separated by colons</li>
+    <li>Pairs are separated by commas</li>
+    <li>Objects are enclosed in curly braces {}</li>
+    <li>Arrays are enclosed in square brackets []</li>
+    <li>Keys must be strings enclosed in double quotes</li>
+    <li>Valid value types: string, number, object, array, boolean, null</li>
+    <li>Trailing commas are not allowed</li>
+  </ul>
+
+  <h2>Common JSON Errors and How to Fix Them</h2>
+  <div class="faq-item"><h3>Missing or extra commas</h3><p>Ensure each key-value pair except the last is followed by a comma. Remove trailing commas after the final pair or array item.</p></div>
+  <div class="faq-item"><h3>Unquoted keys</h3><p>All JSON keys must be enclosed in double quotes. Single quotes or unquoted keys are invalid.</p></div>
+  <div class="faq-item"><h3>Nested object errors</h3><p>Ensure all opening braces and brackets have matching closing ones. Use a JSON formatter to visualize the structure.</p></div>
+  <div class="faq-item"><h3>Invalid number formats</h3><p>Numbers cannot have leading zeros (except for decimal fractions). Scientific notation is allowed but hexadecimal is not.</p></div>
+
+</section><footer><p><a href="../privacy.html">Privacy Policy</a> · <a href="../about.html">About</a> · <a href="../contact.html">Contact</a></p></footer>
 </div>
 
 <script>
